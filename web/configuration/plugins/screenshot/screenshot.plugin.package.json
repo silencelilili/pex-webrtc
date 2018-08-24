@@ -1,0 +1,17 @@
+{
+    "id": "screenshot-plugin-1.0",
+    "name": "screenshot",
+    "description": "Allows you to take a screenshot of the video from the conference, or your own camera, and it will pop up as an image in the browser so you can save it.",
+    "version": 1.0,
+    "srcURL": "configuration/plugins/screenshot/screenshot.plugin.js",
+    "allowUnload": false,
+    "platforms": ["web"],
+    "participantRoles": ["chair", "guest"],
+    "menuItems": {
+        "toolbar": [{
+            "icon": "configuration/plugins/screenshot/crop.svg#crop",
+            "label": "take screenshot of videos",
+            "action": "openScreenshotDialog"
+        }]
+    }
+}

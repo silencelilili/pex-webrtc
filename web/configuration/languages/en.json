@@ -1,0 +1,594 @@
+{
+    "APPLICATION": {
+        "TITLE": "Pexip Infinity Connect"
+    },
+
+    "OK": "OK",
+    "BACK": "Back",
+    "CANCEL": "Cancel",
+    "RESET": "Reset",
+    "CONNECT": "Connect",
+    "DISCONNECT": "Disconnect",
+    "CALL": "Call",
+    "PRESENT": "Present",
+    "CLOSE": "Close",
+    "DEFAULT": "Default",
+    "CAMERA": "Camera",
+    "FRONT_CAMERA": "Front Camera",
+    "BACK_CAMERA": "Back Camera",
+    "MICROPHONE": "Microphone",
+    "SPEAKER": "Speaker",
+    "HEADSET": "Headset",
+    "SAVE": "Save",
+    "YOU": "you",
+    "NONE": "None",
+    "SKIP": "Skip",
+
+    "videoinput": "Camera {{n}}",
+    "audioinput": "Microphone {{n}}",
+    "audiooutput": "Speaker {{n}}",
+
+    "CONFIGURATION": {
+        "EDIT_DISPLAY_NAME": {
+            "TITLE": "Welcome",
+            "PLACEHOLDER": "Type your name here"
+        }
+    },
+
+    "JOIN_DIALOG": {
+        "TITLE": "Would you like to join this meeting?",
+        "JOIN": "Yes, join now"
+    },
+
+    "CONNECT_FAIL_DIALOG": {
+        "TITLE": "Unable to join"
+    },
+
+    "SEARCH": {
+        "SEARCH_PLACEHOLDER": "Search to call",
+        "RECENTS": "Recents",
+        "REMOVE_RECENTS": "Remove recent calls",
+        "CALENDAR": "Calendar",
+        "DIRECTORY": "Directory",
+        "EMPTY_HISTORY": "People you have recently called<br/>will show up here!"
+    },
+
+    "HOME": {
+        "TITLE": "Homepage",
+        "DISPLAYNAME_PLACEHOLDER": "Enter your name",
+        "ROLE_PLACEHOLDER": "Role/Title",
+        "BRAND_WATERMARK": "Brand Watermark",
+        "VIDEO_OFF": "Camera<br /> off",
+        "MICROPHONE_OFF": "Microphone<br /> off",
+        "VIDEO_AND_MICROPHONE_OFF": "Camera & Microphone<br /> off",
+        "STANDBY": "Entering standby mode<br /> tap to wake"
+    },
+
+    "CONFERENCE": {
+        "TITLE": "In Meeting",
+        "CONTROL_ONLY_SCREEN": {
+            "MEETING_CONTROLS_LEFT": "Meeting participants and controls are shown on the left.<br/>",
+            "MEETING_CONTROLS_BELOW": "Meeting participants and controls are shown below.<br/>",
+            "PRESENT_SHARE": "You can also present files or share your screen from the toolbar.",
+            "PRESENT": "You can also present files from the toolbar."
+        },
+        "CONTEXT": {
+            "LOCK": "Lock meeting",
+            "UNLOCK": "Unlock meeting",
+            "MUTE_ALL_GUESTS": "Mute all Guests",
+            "UNMUTE_ALL_GUESTS": "Unmute all Guests",
+            "DISCONNECT_ALL": "Disconnect all",
+            "MEDIA_DEVICES": "Select media devices",
+            "GET_STATS": "Get media stats",
+            "ADD_PARTICIPANT": "Add Participant"
+        },
+        "SHARE": "Copy meeting link",
+        "SHARE_COPIED": "Copied!"
+    },
+
+    "PARTICIPANT": {
+        "SHOW_INFO": "Show Info",
+        "MUTE": "Mute",
+        "UNMUTE": "Unmute",
+        "SEND_DTMF": "Send DTMF",
+        "DISCONNECT": "Disconnect",
+        "CANCEL_DIALOUT": "Cancel Dialout",
+        "MAKE_HOST": "Make Host",
+        "MAKE_GUEST": "Make Guest",
+        "FILTER_NO_RESULTS": "Nothing found",
+        "TRANSFER": "Transfer Participant",
+        "EMPTY_WAITING_FOR_HOST": "Participants will be listed when you join",
+        "INFO": {
+            "ROLE": "Role",
+            "JOINED": "Joined at",
+            "PARTICIPANT": "Participant",
+            "HOST": "Host",
+            "GUEST": "Guest",
+            "MUTED": "Muted",
+            "PRESENTING": "Presenting"
+        }
+    },
+
+    "DISCONNECT_PARTICIPANT": {
+        "TITLE": "Are you sure you want to disconnect {{name}}?",
+        "DISCONNECT": "Yes, disconnect"
+    },
+
+    "DISCONNECTED": {
+        "TITLE": "You have been disconnected by another participant",
+        "REJOIN": "Rejoin now",
+        "REDIAL": "Redial now"
+    },
+
+    "DISCONNECT_PROMPT": {
+        "TITLE": "Do you want to disconnect from the meeting?"
+    },
+
+    "DISCONNECT_ALL": {
+        "TITLE": "Are you sure you want to disconnect all?",
+        "DISCONNECT_ALL": "Yes, disconnect all"
+    },
+
+    "CERT_ERROR_DIALOG": {
+        "TITLE": "Insecure connection",
+        "PROMPT": "The server is using an untrusted certificate. Do you want to proceed with the connection?"
+    },
+
+    "AUTH_DIALOG": {
+        "TITLE": "Authentication required",
+        "PROMPT": "The server requires a username and password",
+        "USER_NAME": "Username",
+        "PASSWORD": "Password",
+        "CANCEL": "Cancel",
+        "LOG_IN": "Log In"
+    },
+
+    "MEDIA_STATS_DIALOG": {
+        "TITLE": "Media Statistics",
+        "NO_STATISTICS_TITLE": "No Statistics",
+        "NO_VIDEO_AND_AUDIO": "You are not sharing video or audio",
+        "VIDEO": "Video",
+        "AUDIO": "Audio",
+        "INCOMING": "In",
+        "OUTGOING": "Out",
+        "BITRATE": "Bitrate",
+        "PACKETS_LOST": "Packets Lost",
+        "PACKETS_TRANSMITTED": "Packets Transmitted",
+        "PERCENTAGE_LOST": "Total Percentage Lost",
+        "RECENT_PERCENTAGE_LOST": "Recent Percentage Lost",
+        "CODEC": "Codec",
+        "RESOLUTION": "Resolution",
+        "CONFIGURED_BITRATE": "Configured Bitrate",
+        "DECODER_DELAY": "Decoder Delay",
+        "DECODED_FPS": "Decoded FPS",
+        "NOT_AVAILABLE": "N/A"
+    },
+
+    "EVENTS": {
+        "TITLE": "Events",
+        "INPUT_PLACEHOLDER": "Write a message",
+        "INPUT_PLACEHOLDER_CHAT_DISABLED": "Chat has been disabled",
+
+        "MEETING": "Welcome to meeting: {{alias}}",
+
+        "CONFERENCE_LOCKED": "Conference locked",
+        "CONFERENCE_UNLOCKED": "Conference unlocked",
+        "CONFERENCE_MUTED": "All Guests muted",
+        "CONFERENCE_UNMUTED": "All Guests unmuted",
+
+        "PARTICIPANT_MUTED": "{{name}} was muted",
+        "PARTICIPANT_UNMUTED": "{{name}} was unmuted",
+        "PARTICIPANT_START_PRESENTING": "started presentation",
+        "PARTICIPANT_FINISH_PRESENTING": "stopped presentation",
+        "PARTICIPANT_ADDED": "joined",
+        "PARTICIPANT_CALLED": "being called",
+        "PARTICIPANT_DISCONNECTED": "disconnected"
+    },
+
+    "ROSTER": {
+        "INPUT_PLACEHOLDER": "Filter by name"
+    },
+
+    "TRAY": {
+        "OPEN": "Open",
+        "OPEN_DEV_TOOLS": "Open Developer Tools",
+        "QUIT": "Quit"
+    },
+
+    "SCREEN_SHARE_DIALOG": {
+        "TITLE": "Select screen or window to share"
+    },
+
+    "SLIDE_SHARE_DIALOG": {
+        "TITLE": "Presentation",
+        "PRESENT": "Present",
+        "SELECTED": "selected",
+        "UPLOAD_TO_PRESENT": "Upload or<br>drag & drop<br>to present",
+        "UPLOAD_TO_PRESENT_MOBILE": "Upload to present",
+        "REMOVE_ALL": "Remove All"
+    },
+
+    "UNSUPPORTED_DIALOG": {
+        "TITLE": "Unsupported Platform",
+        "MESSAGE": "This platform is unsupported.  You will be redirected to an older version of the app."
+    },
+
+    "PIN_DIALOG": {
+        "TITLE": "Welcome to the meeting",
+        "PLACEHOLDER": "Enter your PIN here",
+        "PLACEHOLDER_INVAID_PIN": "Incorrect PIN, please try again",
+        "TITLE_MID": "or just",
+        "JOIN": "Join"
+    },
+
+    "HOST_PIN_DIALOG": {
+        "TITLE": "Join the meeting<br/>as a Host",
+        "PLACEHOLDER": "Enter your PIN here",
+        "ENTER": "Enter"
+    },
+
+    "EXTENSION_DIALOG": {
+        "TITLE": "Welcome",
+        "PLACEHOLDER": "Enter the extension here",
+        "PLACEHOLDER_INVALID": "Cannot connect to this extension. Check and try again.",
+        "JOIN": "Join"
+    },
+
+    "MSSIP_DIALOG": {
+        "PLACEHOLDER": "Enter the meeting ID here",
+        "PLACEHOLDER_INVALID": "Cannot connect to this meeting ID. Check and try again."
+    },
+
+    "DTMF_DIALOG": {
+        "TITLE": "You are sending to"
+    },
+
+    "REGISTRATION": {
+        "REGISTER": "Register",
+        "UNREGISTER": "Unregister",
+        "REGISTERING": "Registering",
+        "UNREGISTERING": "Unregistering",
+        "CANCEL": "Cancel",
+        "TITLE": "Registration",
+        "HOST": "Server address",
+        "ALIAS": "Alias",
+        "USERNAME": "Username",
+        "PASSWORD": "Password",
+        "REGISTRATION_FAILED": "Registration failed",
+        "UNAUTHORIZED_ERROR": "Check the alias, username or password and try again",
+        "HOST_OR_NETWORK_ERROR": "Check the server address or network and try again",
+        "TIMEOUT_ERROR": "Timeout when connecting to the server, please try again",
+        "NETWORK_ERROR": "Check your network connection, registration is retrying",
+        "REGISTRATION_IS_RETRYING": "Check the network, registration is retrying",
+        "UNKNOWN_ERROR": "There was a problem when attempting to register"
+    },
+
+    "INCOMINGCALL_DIALOG": {
+        "TITLE": "Incoming Call",
+        "DECLINE": "Decline",
+        "ACCEPT": "Accept"
+    },
+
+    "CONTROLS_PANE": {
+        "TITLE": "Control"
+    },
+
+    "SETTINGS_DIALOG": {
+        "TITLE": "Settings",
+        "BANDWIDTH_LOW": "Bandwidth - Low",
+        "BANDWIDTH_MEDIUM": "Bandwidth - Medium",
+        "BANDWIDTH_HIGH": "Bandwidth - High",
+        "BANDWIDTH_MAXIMUM": "Bandwidth - Maximum",
+        "BANDWIDTH_LOW_WITH_NUMBER": "Low ({{value}}kbps)",
+        "BANDWIDTH_MEDIUM_WITH_NUMBER": "Medium ({{value}}kbps)",
+        "BANDWIDTH_HIGH_WITH_NUMBER": "High ({{value}}kbps)",
+        "BANDWIDTH_MAXIMUM_WITH_NUMBER": "Maximum ({{value}}kbps)",
+        "ADVANCED_SETTINGS": "Advanced settings",
+        "REGISTRATION": "Registration",
+        "REGISTERED": "Registered",
+        "UNREGISTERED": "Unregistered",
+        "CHANGE_CAMERA": "Select camera",
+        "CHANGE_MICROPHONE": "Select microphone",
+        "CHANGE_SPEAKER": "Select audio output",
+        "CHANGE_BANDWIDTH": "Select bandwidth"
+    },
+
+    "MEDIA_DEVICES_DIALOG": {
+        "TITLE": "Media Devices"
+    },
+
+    "ADVANCED_SETTINGS": {
+        "TITLE": "Advanced settings",
+        "SCREEN_SHARING_QUALITY": "Screen sharing quality",
+        "FPS": "{{value}} fps",
+        "SHARPNESS": "Sharpness",
+        "MOTION": "Motion",
+        "CONFIRM_WHEN_DISCONNECTING": "Confirm when disconnecting",
+        "VIEW_FULL_MOTION_PRESENTATION": "View full motion presentation",
+        "SEND_ANONYMOUS_STATISTICS": "Send anonymous statistics",
+        "PLAY_RINGTONE_ON_INCOMING_CALLS": "Play ringtone on incoming calls",
+        "START_APPLICATION_IN_BACKGROUND": "Start Application in background",
+        "HIGH_CONTRAST": "High contrast"
+    },
+
+    "ABOUT": {
+        "LINK": "More information",
+        "TITLE": "About this app",
+        "COPYRIGHT": "©2017 Pexip® AS",
+        "VERSION_INFO_PREAMBLE": "You are running version",
+        "PLATFORM_PREAMBLE": "Your platform is",
+        "UA_PREAMBLE": "Your User-Agent is",
+        "ELECTRON_PREAMBLE": "Your electron versions",
+        "LICENSE_LINK": "You can find license information for the 3rd party software used in this application on"
+    },
+
+    "RESET": {
+        "TITLE": "Reset app",
+        "CONTENT": "Reset app storage and registration settings",
+        "BUTTON": "Reset"
+    },
+
+    "LOGS": {
+        "TITLE": "Logs",
+        "BUTTON": "Copy to clipboard"
+    },
+
+    "PLUGIN": {
+        "TITLE": "Plugin"
+    },
+
+    "ESCALATE": {
+        "RECONNECT": {
+            "TITLE": "Start Video"
+        }
+    },
+
+    "SCREENSHARE_MISSING_DIALOG": {
+        "TITLE": "Install or enable<br/>screensharing extension",
+        "MESSAGE": "You may need to install the Pexip <br/> Screensharing Extension in your browser.<br/><br/>You can check to see if it’s enabled here<br/>{{url}}"
+    },
+
+    "DEVICE_PERMISSION_BLOCKED_DIALOG": {
+        "TITLE": "Camera or microphone blocked",
+        "MESSAGE_ONE": "Check access of your camera and microphone",
+        "MESSAGE_TWO": "click",
+        "MESSAGE_THREE": "in your URL bar",
+        "DISMISS": "Dismiss"
+    },
+
+    "DEVICE_PERMISSION_TIMEOUT_DIALOG": {
+        "TITLE": "Enable camera and microphone",
+        "MESSAGE_ONE": "You need to allow access",
+        "MESSAGE_TWO": "from your browser"
+    },
+
+    "DEVICE_PERMISSION_CAMERA_BLOCKED_DIALOG": {
+        "TITLE": "Enable camera",
+        "MESSAGE": "Check that your camera is properly connected and allow the access from your browser. <br/><br/> Also check your devices settings."
+    },
+
+    "DEVICE_PERMISSION_OTHER_DIALOG": {
+        "TITLE": "Unable to access your camera or microphone",
+        "MESSAGE": "Check that your camera is properly connected or not being actively used by another application."
+    },
+
+    "INSTALL": "Install",
+
+    "TOOLTIP": {
+        "SETTINGS": "Settings",
+        "VIDEO_ON": "Camera on",
+        "VIDEO_OFF": "Camera off",
+        "VIDEO_ON_ACTION": "Turn my camera off",
+        "VIDEO_OFF_ACTION": "Turn my camera on",
+        "SELECT_AUDIO_OUTPUT": "Select audio output",
+        "MICROPHONE_ON": "Microphone on",
+        "MICROPHONE_OFF": "Microphone off",
+        "MICROPHONE_ON_ACTION": "Turn my microphone off",
+        "MICROPHONE_OFF_ACTION": "Turn my microphone on",
+        "VIDEO_AND_MICROPHONE_OFF": "Camera & Microphone off",
+        "SHARE": "Share",
+        "EVENTS": "Events",
+        "ROSTER": "Participant list",
+        "HOST": "Host",
+        "EXTERNAL": "External Guest",
+        "RECORDING": "Recording",
+        "GUEST": "Guest",
+        "MUTED": "Muted",
+        "PRESENTER": "Presenter",
+        "DISABLE_CAMERA": "Disable camera",
+        "ENABLE_CAMERA": "Enable camera",
+        "START_VIDEO": "Start Video",
+        "MUTE_MICCROPHONE": "Mute microphone",
+        "UNMUTE_MICCROPHONE": "Unmute microphone",
+        "START_AUDIO": "Start audio",
+        "DISCONNECT": "Disconnect",
+        "SHARE_SCREEN": "Share my screen",
+        "UPLOAD_TO_PRESENT": "Present files",
+        "STOP_PRESENTING": "Stop presenting",
+        "START_PRESENTATION_VIDEO": "View full motion presentation",
+        "STOP_PRESENTATION_VIDEO": "View normal presentation",
+        "OPEN_DIALPAD": "Open dialpad",
+        "ENTER_HOST_PIN": "Enter Host PIN",
+        "POPUP_PRESENTATION": "View presentation in separate window",
+        "CLOSE_POPUP_PRESENTATION": "Close separate presentation window",
+        "UNMUTE_INCOMING_AUDIO": "Unmute incoming audio",
+        "MUTE_INCOMING_AUDIO": "Mute incoming audio",
+        "ADJUST_VOLUME": "Adjust audio volume",
+        "ACCEPT": "Accept",
+        "REJECT": "Reject",
+        "EDIT_DISPLAY_NAME": "Edit display name",
+        "ADD_PARTICIPANT": "Add participant",
+        "CONTROL": "Control",
+        "CLOSE_CONTROL": "Close control",
+        "SHOW_SIDE_PANEL": "Show side panel",
+        "HIDE_SIDE_PANEL": "Hide side panel",
+        "SHOW_SELFVIEW": "Show selfview"
+    },
+
+    "ADD_PARTICIPANT_DIALOG": {
+        "TITLE": "Add Participant",
+        "PLACEHOLDER": "Type the participant details here",
+        "BUTTON": "Call in",
+        "FAILED": "Failed to add this participant."
+    },
+
+    "TRANSFER_PARTICIPANT_DIALOG": {
+        "TITLE": "Transfer Participant",
+        "MEETING_PLACEHOLDER": "Type the meeting URI here",
+        "PIN_PLACEHOLDER": "Enter PIN here",
+        "BUTTON": "Transfer",
+        "FAILED": "Failed to transfer participant",
+        "AS": "As a ",
+        "DISMISS": "Dismiss"
+    },
+
+    "GUEST": "Guest",
+    "HOST": "Host",
+    "STREAMING": "Streaming Participant",
+
+    "ERROR_DIALOG": {
+        "TITLE": "Oops!",
+        "MESSAGE": "Looks like something went wrong! Please provide the following information to your Pexip support representative and tell us a bit about what you were doing. You may need to restart this application."
+    },
+
+    "ERROR_MESSAGES": {
+        "PEX100": "The PIN you entered is invalid - please try again.",
+        "PEX101": "The PIN you entered is invalid - please try again.",
+        "PEX111": "There is no connection. Please try again.",
+        "PEX112": "There is no connection available.",
+        "PEX113": "Your connection was lost. Please try again.",
+        "PEX114": "The system you are trying to reach is over capacity.",
+        "PEX115": "Transfer failed.",
+        "PEX116": "Call failed - please contact your administrator",
+        "PEX117": "The call failed. Please try again",
+        "PEX118": "The server cannot be reached.",
+        "PEX119": "Call failed: Failed to forward request",
+        "PEX120": "A Host ended the meeting.",
+        "PEX121": "A Host ended the meeting.",
+        "PEX122": "An administrator ended the meeting.",
+        "PEX123": "An administrator disconnected you from the meeting.",
+        "PEX124": "Another participant in the meeting disconnected you.",
+        "PEX125": "A Host ended the meeting.",
+        "PEX126": "The meeting Host has not joined or unlocked the meeting.",
+        "PEX128": "Call failed: a firewall maybe blocking access.",
+        "PEX130": "Something went wrong with the meeting. Please try to connect again.",
+        "PEX131": "Something went wrong with the meeting. Please try to connect again.",
+        "PEX132": "Something went wrong with the meeting. Please try to connect again.",
+        "PEX140": "The meeting has ended.",
+        "PEX141": "The meeting ended because the Host(s) left.",
+        "PEX142": "You were the only participant left in the meeting.",
+        "PEX143": "The test call has finished.",
+        "PEX150": "The person you are trying to call did not answer or could not be reached.",
+        "PEX151": "The other participant has disconnected.",
+        "PEX152": "The call could not be placed.",
+        "PEX153": "The call could not be placed. Please contact your administrator.",
+        "PEX154": "Cannot connect to {{alias}} <br/> Check this address and try again.",
+        "PEX155": "Could not join {{host}}",
+        "PEX156": "The call could not be placed.",
+        "PEX157": "Could not join {{host}}",
+        "PEX170": "Call failed: Please disable any privacy extensions on your browser.",
+        "PEX171": "Your camera and/or microphone are not available. Please make sure they are not being actively used by another app.",
+        "PEX180": "The presentation ended.",
+        "PEX181": "The presentation stream was disconnected.",
+        "PEX182": "The presentation stream is unavailable.",
+        "PEX183": "The screenshare was cancelled.",
+        "PEX184": "Something went wrong with screenshare. Please try again.",
+        "PEX185": "The screenshare was disconnected.",
+        "PEX190": "Error connecting to the meeting",
+        "PEX191": "Error connecting to the meeting",
+        "PEX192": "Too many PIN entry attempts",
+        "PEX193": "Error connecting to the meeting. Please contact your administrator",
+        "PEX194": "This meeting has reached the maximum number of participants.",
+	      "PEX195": "Error connecting to the meeting. Please contact your administrator"
+    },
+
+    "TIMELINE_ACTIVITIES": {
+        "CONFERENCE_CONNECT": "Welcome to",
+        "PRESENTING_START": "{{value}} started presenting",
+        "PRESENTING_STOP": "{{value}} stopped presenting",
+        "CONNECTED": "{{value}} joined",
+        "CALLED": "{{value}} being called",
+        "WAITING": "{{value}} joined and is waiting to enter the meeting",
+        "SELF_CONNECTED": "You joined",
+        "CONNECTED_MULTIPLE": "{{value}} people joined",
+        "DISCONNECTED": "{{value}} disconnected",
+        "DISCONNECTED_MULTIPLE": "{{value}} people disconnected",
+        "CHAT_MESSAGE_SEND": "You sent a message",
+        "CHAT_MESSAGE_RECEIVE": "{{value}} sent a message",
+        "CHAT_MESSAGE_SEND_MULTIPLE": "You sent {{value}} messages",
+        "CHAT_MESSAGE_RECEIVE_MULTIPLE": "{{value}} messages were sent",
+        "LOCKED": "The meeting was locked",
+        "UNLOCKED": "The meeting was unlocked",
+        "MUTED": "Guests were muted",
+        "UNMUTED": "Guests were unmuted",
+        "CONNECTING": "Dialing out to {{value}}",
+        "CONNECTING_FAILED": "Dial out to {{value}} cancelled or timed out"
+    },
+
+    "PROVISION_DIALOG": {
+        "TITLE": "Your personalized settings will be automatically applied to your app.",
+        "MESSAGE": "You should only use links from a source you trust."
+    },
+
+    "PROVISION": "Provision",
+
+    "CONTINUE": "Continue",
+
+    "CONNECTION": {
+        "ISSUES": "Connection Alert"
+    },
+
+    "SHEET": {
+        "CHAT_MESSAGE_RECEIVE": "{{person}} said",
+        "CHAT_MESSAGE_SEND": "You said",
+        "OPEN_QUOTE": "“",
+        "CLOSE_QUOTE": "”",
+        "OTHER_PARTICIPANT": "other",
+        "OTHER_PARTICIPANTS": "others",
+        "START_CONFERENCE": "Open meeting",
+        "STARTED_PRESENTING": "{{person}} started presenting",
+        "STOPPED_PRESENTING": "{{person}} stopped presenting"
+    },
+
+    "JUST_YOU": "Just you here",
+    "ACCEPT": "Accept",
+
+    "LOCK": "Lock",
+    "UNLOCK": "Unlock",
+
+    "ARIA": {
+        "VIDEO_INPUT": "Change camera",
+        "AUDIO_INPUT": "Change microphone",
+        "AUDIO_OUTPUT": "Change audio output device",
+        "EXPAND": "Expand",
+        "TOGGLE": "TOGGLE"
+    },
+
+    "STARTUP_WIZARD": {
+        "HOME_SCREEN": {
+            "WELCOME": "Welcome to Pexip Infinity Connect!",
+            "SETTINGS_BUTTON": "Change settings like which camera you use",
+            "VIDEO_MUTE": "Turn your camera on/off",
+            "AUDIO_MUTE": "Turn your microphone on/off",
+            "PRESENTATION_ONLY_MESSAGE": "Disabling both camera and microphone will only allow you to present files",
+            "AUDIO_OUTPUT": "Select your audio output",
+            "SEARCH_BOX": "Enter the alias of a place or person to meet",
+            "ENTER_CONFERENCE_MESSAGE": "Let’s meet"
+        },
+        "CONFERENCE": {
+            "TIMELINE_ONE": "Collaboration events appear in the timeline",
+            "TOOLBAR_ONE": "This menu shows your collaboration controls",
+            "TOOLBAR_TWO": "If you are only presenting, you can also start your microphone and camera here too",
+            "SIDEBAR_TOGGLE": "Open the sidebar to control the meeting or send a message",
+            "ROSTER_MESSAGE": "The roster shows who’s in the meeting giving you full control",
+            "EVENTS_MESSAGE": "Toggling opens the stream of collaboration events as they happen",
+            "STATUS_BUTTON": "This button opens the meeting controls menu",
+            "END_MESSAGE": "Ok, you're all done.  Let's get you back to the start.  Have fun!"
+        }
+    },
+
+    "BRANDING_SETTINGS_UPDATE": "Your user settings have been updated by the administrator",
+    "DOWNLOAD_LOGS": {
+        "TITLE": "Logs Downloaded"
+    }
+}

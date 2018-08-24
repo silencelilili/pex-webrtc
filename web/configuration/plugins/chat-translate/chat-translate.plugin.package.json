@@ -1,0 +1,10 @@
+{
+    "id": "chat-translate-plugin-1.0",
+    "name": "chat translate",
+    "description": "Translate message through format: 'trx:<original language>:< target language>:<text>'",
+    "version": 1.0,
+    "srcURL": "configuration/plugins/chat-translate/chat-translate.plugin.js",
+    "allowUnload": true,
+    "platforms": ["web", "electron", "ios", "android"],
+    "participantRoles": ["chair", "guest"]
+}

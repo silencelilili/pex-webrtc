@@ -1,0 +1,17 @@
+{
+    "id": "spotlight-plugin-1.0",
+    "name": "spotlight",
+    "description": "Applies a spotlight to a participant from the roster",
+    "version": 1.0,
+    "srcURL": "configuration/plugins/spotlight/spotlight.plugin.js",
+    "allowUnload": true,
+    "platforms": ["web", "electron", "ios", "android"],
+    "participantRoles": ["chair"],
+    "menuItems": {
+        "participants": [{
+            "icon": null,
+            "label": null,
+            "action": "spotlightParticipant"
+        }]
+    }
+}

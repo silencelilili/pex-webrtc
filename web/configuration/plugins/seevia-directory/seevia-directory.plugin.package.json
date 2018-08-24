@@ -1,0 +1,17 @@
+{
+    "id": "seevia-directory-plugin-1.0",
+    "name": "seevia directory",
+    "description": "External service for b2b VC directory where you can search for Lync users or H323/SIP endpoints and dial them in to your VMR",
+    "version": 1.0,
+    "srcURL": "configuration/plugins/seevia-directory/seevia-directory.plugin.js",
+    "allowUnload": true,
+    "platforms": ["web", "electron"],
+    "participantRoles": ["chair"],
+    "menuItems": {
+        "conference": [{
+            "icon": "#extension",
+            "label": "Seevia Directory",
+            "action": "seeviaDirectoryDial"
+        }]
+    }
+}

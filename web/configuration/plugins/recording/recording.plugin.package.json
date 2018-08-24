@@ -1,0 +1,17 @@
+{
+    "id": "recording-plugin-1.0",
+    "name": "recording",
+    "description": "recording the conference through adding a streaming participant",
+    "version": 1.0,
+    "srcURL": "configuration/plugins/recording/recording.plugin.js",
+    "allowUnload": true,
+    "platforms": ["web", "electron", "ios", "android"],
+    "participantRoles": ["chair"],
+    "menuItems": {
+        "toolbar": [{
+            "icon": null,
+            "label": null,
+            "action": "recordConference"
+        }]
+    }
+}

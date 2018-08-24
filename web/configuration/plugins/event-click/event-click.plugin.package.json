@@ -1,0 +1,10 @@
+{
+    "id": "event-click-plugin-1.0",
+    "name": "event click",
+    "description": "Hook the click of event in the events list",
+    "version": 1.0,
+    "srcURL": "configuration/plugins/event-click/event-click.plugin.js",
+    "allowUnload": true,
+    "platforms": ["web", "electron", "ios", "android"],
+    "participantRoles": ["chair", "guest"]
+}

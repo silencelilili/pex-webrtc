@@ -1,0 +1,17 @@
+{
+    "id": "layout-plugin-1.0",
+    "name": "layout",
+    "description": "Ability to change the conference layout",
+    "version": 1.0,
+    "srcURL": "configuration/plugins/layout/layout.plugin.js",
+    "allowUnload": true,
+    "platforms": ["web", "electron", "ios", "android"],
+    "participantRoles": ["chair"],
+    "menuItems": {
+        "conference": [{
+            "icon": "configuration/plugins/layout/grid.svg#grid",
+            "label": "Change conference layout",
+            "action": "changeConferenceLayout"
+        }]
+    }
+}

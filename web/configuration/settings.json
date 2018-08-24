@@ -1,0 +1,29 @@
+{
+    "applicationSettings": {
+        "dialOutProtocol": "auto",
+        "languages": ["en"],
+        "bandwidths": ["256", "576", "1264", "2464"],
+        "turnServer": null,
+        "serverAddress": null,
+        "registrationEnabled": true,
+        "escalateEnabled": true,
+        "wizardOnFirstRun": false,
+        "h264Enabled": false
+    },
+
+    "defaultUserSettings": {
+        "language": "en",
+        "screenshareFrameRate": 2,
+        "promptDisconnect": true,
+        "viewFullMotionPresentation": false,
+        "sendStats": true,
+        "bandwidth": "576",
+        "enabledPlugins": [],
+        "showConferenceSidebar": false,
+        "highContrast": false,
+        "startInBackground": false,
+        "playRingtone": true
+    },
+
+    "plugins": []
+}

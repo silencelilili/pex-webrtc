@@ -1,0 +1,7 @@
+.side-bar-list-item .menu {
+    display: block;
+}
+
+input.pinnumeric {
+    -webkit-text-security: disc;
+}

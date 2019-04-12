@@ -1,0 +1,54 @@
+<div class="side-bar-list-item brand-tertiary brand-tertiary-hover sel-participant-list-item" ng-repeat="participant in connection.participants | values | filter: {displayName: search} | orderBy:['-startTime']" ng-click="showParticipant(participant);">
+    <div class="menu" ng-show="connection.data.isChair && !connection.data.isGateway" ng-click="$event.stopPropagation();">
+        <span class="sel-participant-toggle-mute" ng-click="connection.participantToggleMute(participant)" ng-show="participant.isConnected">
+            <a bindonce bo-title="'IDS_PARTICIPANT_MUTE' | translate:{displayName: participant.displayName}" class="transparent button sel-participant-mute" href="" ng-show="!participant.isMuted">
+                <i class="mdi-mic"></i>
+            </a>
+            <a bindonce bo-title="'IDS_PARTICIPANT_UNMUTE' | translate:{displayName: participant.displayName}" class="transparent button sel-participant-mute" href="" ng-show="participant.isMuted">
+                <i class="mdi-moff"></i>
+            </a>
+        </span>
+        <span ng-if="participant.isWaiting && connection.data.hasStartedMedia">
+            <a bindonce bo-title="'IDS_PARTICIPANT_DISCONNECT' | translate:{displayName: participant.displayName}" class="red button sel-participant-disconnect" href="" ng-click="connection.participantDisconnect(participant)">
+                <i class="mdi-call-end"></i>
+            </a>
+        </span>
+        <span ng-show="participant.isWaiting && connection.data.hasStartedMedia" ng-click="connection.participantUnlock(participant)">
+            <a bindonce bo-title="'IDS_PARTICIPANT_UNLOCK' | translate:{displayName: participant.displayName}" class="green button" href="">
+                <i class="mdi-call"></i>
+            </a>
+        </span>
+    </div>
+    <div class="avatar">
+        <!-- <div avatar name="{{participant.displayName}}"></div> -->
+        <img ng-src="{{participant.avatarUrl}}" style="visibility: hidden" onload="this.style.visibility='visible'" onerror="this.style.visibility='hidden'" />
+        <div class="badge-container">
+            <!-- <div class="badge gray sel-participant-connecting" title="{{'IDS_PARTICIPANT_BADGE_SELF' | translate}}" ng-if="participant.isSelf">
+                <i class="mdi-account-circle"></i>
+            </div> -->
+            <div class="badge green sel-participant-connecting" bindonce bo-title="'IDS_PARTICIPANT_BADGE_CONNECTING' | translate" ng-if="participant.isConnecting">
+                <i class="mdi-ring-volume"></i>
+            </div>
+            <div class="badge blue sel-participant-presenting" bindonce bo-title="'IDS_PARTICIPANT_BADGE_PRESENTING' | translate" ng-if="participant.isPresenting">
+                <i class="mdi-ondemand-video"></i>
+            </div>
+            <div class="badge red sel-participant-muted" bindonce bo-title="'IDS_PARTICIPANT_BADGE_MUTED' | translate" ng-if="participant.isMuted">
+                <i class="mdi-moff"></i>
+            </div>
+            <div class="badge red sel-participant-waiting" bindonce bo-title="'IDS_PARTICIPANT_BADGE_WAITING' | translate" ng-if="participant.isWaiting">
+                <i class="mdi-pause"></i>
+            </div>
+            <div class="badge red" bindonce bo-title="'IDS_PARTICIPANT_BADGE_STREAMING' | translate" ng-if="participant.isStreaming">
+                <i class="mdi-cloud-upload"></i>
+            </div>
+            <div class="badge blue" bindonce bo-title="'IDS_PARTICIPANT_BADGE_SPEAKING' | translate" ng-if="participant.vad == 100">
+                <i class="mdi-volume-up"></i>
+            </div>
+        </div>
+    </div>
+    <div class="participant-list-name sel-participant-name" bindonce bo-title="participant.displayName + ' (' + participant.uri + ')'" bo-bind="participant.displayName">
+    </div>
+    <div class="participant-list-name-detail" bindonce bo-title="participant.displayName + ' (' + participant.uri + ')'" translate="IDS_PARTICIPANT_ROLE_{{participant.role}}">
+    </div>
+    <div class="clearfix"></div>
+</div>

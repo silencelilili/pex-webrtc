@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html class="no-js" id="ng-app" lang="en" ng-app="pexapp" ng-controller="presentationController" arrow-keys>
+
+<head>
+    <base href="../">
+
+    <link href="configuration/favicon.png" rel="icon" type="image/x-icon" />
+
+    <link rel="stylesheet" href="fonts/mdi/style.css">
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/stage.css" rel="stylesheet" />
+    <link ng-href="themes/default/brand.css" rel="stylesheet" />
+    <link ng-href="{{localStorage.theme}}/brand.css" rel="stylesheet" />
+
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+        }
+        /*img,
+        video {
+            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            margin: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }*/
+
+        .presentation-name {
+            opacity: .87;
+            text-shadow: 1px 1px 1px black;
+            text-align: left;
+            font-size: smaller;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: 4px;
+        }
+    </style>
+
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="js/vendor/angular.min.js"></script>
+    <script src="js/vendor/angular-translate.min.js"></script>
+    <script src="js/vendor/angular-translate-loader-static-files.min.js"></script>
+    <script src="js/vendor/bindonce.js"></script>
+    <script src="js/vendor/ngStorage.min.js"></script>
+    <script src="js/vendor/angular-sanitize.min.js"></script>
+    <script src="js/vendor/angular-enhance-text.min.js"></script>
+    <script src="js/vendor/fullscreen.js"></script>
+
+    <script src="js/pexapp.js"></script>
+    <script src="js/idle-timer.js"></script>
+    <script src="js/aspect-watcher-directive.js"></script>
+    <script src="js/arrowkeys-directive.js"></script>
+    <script src="configuration/settings.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/call-history-service.js"></script>
+    <script src="desktop-client/contextmenu.js"></script>
+
+    <script>
+        angular.module('pexapp')
+
+        .run(function() {
+            if (window.opener && window.opener.presentationWindowOnLoad) {
+                window.opener.presentationWindowOnLoad();
+            }
+        })
+
+        .factory('globalService', function(platformSettings) {
+            if (platformSettings.isDesktopClient) {
+                return global.globalService;
+            } else {
+                return {};
+            }
+        })
+
+        .controller('presentationController', function($scope, $timeout, $document, $sce, $log) {
+            window.addEventListener('message', function(event) {
+                $log.log('Got window message', event.data);
+                switch (event.data.type) {
+                    case 'presentation-update':
+                        window.document.title = event.data.name;
+                        $timeout(function() {
+                            $scope.presentationImgSrc = $sce.trustAsResourceUrl(event.data.src);
+                            $scope.presentationName = event.data.name;
+                            $scope.slides = event.data.slides;
+                            $scope.currentSlide = event.data.currentSlide;
+                            $scope.screenShareMode = event.data.screenShareMode;
+                            $scope.origin = event.source;
+                        });
+                        break;
+                    case 'presentation-video-update':
+                        $timeout(function() {
+                            if (event.data.src) {
+                                if (event.data.src instanceof MediaStream) {
+                                    $scope.presentationVideoSrc = event.data.src;
+                                } else {
+                                    $scope.presentationVideoSrc = $sce.trustAsResourceUrl(event.data.src);
+                                }
+                            } else {
+                                delete $scope.presentationVideoSrc;
+                            }
+                        });
+                        break;
+                }
+            });
+
+            $scope.nextSlide = function() {
+                $scope.origin.window.postMessage({
+                    type: 'slide-share-next'
+                }, '*');
+            }
+            $scope.previousSlide = function() {
+                $scope.origin.window.postMessage({
+                    type: 'slide-share-previous'
+                }, '*');
+            }
+            $scope.rightArrowKey = $scope.nextSlide;
+            $scope.leftArrowKey = $scope.previousSlide;
+
+            $scope.fullScreen = $document.fullScreen();
+            $scope.toggleFullScreen = function() {
+                $document.toggleFullScreen();
+            };
+            $document.bind('fullscreenchange', function(e) {
+                $scope.$apply(function() {
+                    $scope.fullScreen = $document.fullScreen();
+                });
+            });
+        });
+    </script>
+</head>
+
+<body ng-cloak class="brand-background" idle-timer aspect-watcher>
+    <div class="stage-background-container stage-background"></div>
+    <div class="main-pip">
+        <img class="presentation-image" ng-src="{{presentationImgSrc}}" ng-if="!presentationVideoSrc" />
+        <video autoplay playsinline ng-src="{{presentationVideoSrc}}" ng-if="presentationVideoSrc" pex-srcobject="presentationVideoSrc"></video>
+        <div class="presentation-name">{{presentationName}}</div>
+    </div>
+
+    <div class="toolbar">
+        <div class="toolbar-buttons">
+            <!-- Fill in buttons to ensure alignment of center buttons -->
+            <a href="" class="button" style="visibility: hidden"></a>
+            <a href="" class="button" style="visibility: hidden" ng-if="fullScreen !== null"></a>
+
+            <span ng-if="screenShareMode === 'screen_http' && slides > 1">
+                <a href="" class="button" ng-click="previousSlide()">
+                    <i class="mdi-navigate-before"></i>
+                </a>
+                <span class="button-like slide-counter">{{currentSlide + 1}} / {{slides}}</span>
+            <a href="" class="button" ng-click="nextSlide()">
+                <i class="mdi-navigate-next"></i>
+            </a>
+            </span>
+
+            <div style="float: right;">
+                <a title="{{'IDS_BUTTON_CLOSE' | translate}}" href="" class="button" onclick="window.close()">
+                    <i class="mdi-close"></i>
+                </a>
+                <span ng-click="toggleFullScreen()" ng-if="fullScreen !== null">
+                    <a title="{{'IDS_FULLSCREEN_ACTIVATE' | translate}}" href="" class="button" ng-show="!fullScreen">
+                        <i class="mdi-fullscreen"></i>
+                    </a>
+                    <a title="{{'IDS_FULLSCREEN_DEACTIVATE' | translate}}" href="" class="button" ng-show="fullScreen">
+                        <i class="mdi-fullscreen-exit"></i>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+<div class="overlay-container" id="dialog-dialpad" toggle ng-click="hide()">
+    <div pex-draggable class="overlay-content brand-overlay" ng-click="$event.stopPropagation()">
+        <div class="dialog-content">
+          <div ng-include="'templates/dialpad.html'"></div>
+        </div>
+        <div class="alert-actions">
+            <button type="button" class="button square" ng-click="hide()">
+                <span translate>IDS_BUTTON_CLOSE</span>
+            </button>
+        </div>
+    </div>
+</div>

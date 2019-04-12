@@ -1,0 +1,16 @@
+<div class="overlay-container brand-overlay sel-modal-popup" ng-if="newConferencePromt">
+    <div class="overlay-content brand-secondary">
+        <div class="dialog-title" translate>IDS_DIALOG_NEW_CONFERENCE_TITLE</div>
+        <div class="dialog-content">
+            <span class="sel-modal-popup-message" translate>IDS_DIALOG_NEW_CONFERENCE_MESSAGE</span>
+        </div>
+        <div class="alert-actions">
+            <button type="button" class="button square sel-disconnect-button-cancel" ng-click="newConferencePromt(false)">
+                <span translate>IDS_BUTTON_CANCEL</span>
+            </button>
+            <button type="submit" class="button square sel-disconnect-button" ng-click="newConferencePromt(true)">
+                <span translate>IDS_BUTTON_DISCONNECT_AND_JOIN</span>
+            </button>
+        </div>
+    </div>
+</div>

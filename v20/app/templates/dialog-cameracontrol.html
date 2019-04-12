@@ -1,0 +1,12 @@
+<div class="overlay-container" id="dialog-cameracontrol" toggle ng-click="hide()">
+    <div pex-draggable class="overlay-content brand-overlay sel-cameracontrol-dialog" ng-click="$event.stopPropagation()">
+        <div class="dialog-content" style="white-space: nowrap; overflow: hidden;">
+          <div ng-include="'templates/cameracontrol.html'"></div>
+        </div>
+        <div class="alert-actions">
+            <button type="button" class="button square sel-dialog-close" ng-click="hide()">
+                <span translate>IDS_BUTTON_CLOSE</span>
+            </button>
+        </div>
+    </div>
+</div>

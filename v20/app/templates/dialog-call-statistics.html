@@ -1,0 +1,30 @@
+<div class="overlay-container" id="dialog-call-statistics" toggle ng-click="hide()">
+    <div class="overlay-content brand-overlay" ng-show="stats" ng-controller="CallStatisticsController" ng-click="$event.stopPropagation()">
+        <table class="dialog-content" style="margin: 0; border-spacing: 16px;">
+            <tr>
+                <td ng-repeat="(direction, mediatype_data) in stats" valign="top">
+                    <div class="media-statistics-direction" translate>{{'IDS_CALLINFO_' + direction.toLowerCase()}}</div>
+                    <div class="media-statistics-data" ng-repeat="(mediatype, stats) in mediatype_data">
+                        <div class="media-statistics-media-type" translate>{{'IDS_CALLINFO_' + mediatype.toLowerCase()}}</div>
+                        <table>
+                            <tr ng-repeat="(key, value) in stats">
+                                <td translate>{{'IDS_CALLINFO_' + key.toLowerCase()}}:</td>
+                                <td>{{value}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="mediastats-footer" colspan="2">
+                    {{'IDS_CALL_STATISTICS_SERVER_VERSION' | translate}}: {{connection.data.version}}
+                </td>
+            </tr>
+        </table>
+        <div class="alert-actions">
+            <button type="button" class="button square" ng-click="hide()">
+                <span translate>IDS_BUTTON_CLOSE</span>
+            </button>
+        </div>
+    </div>
+</div>

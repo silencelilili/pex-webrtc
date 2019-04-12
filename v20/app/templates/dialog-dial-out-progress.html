@@ -1,0 +1,16 @@
+<div class="overlay-container brand-overlay">
+    <form class="overlay-content brand-secondary">
+        <div class="dialog-title" translate translate-values="{uri: connection.dialOutState.uri}">IDS_PARTICIPANT_ADD_CONNECTING_TITLE</div>
+        <div class="dialog-content">
+             <span translate>{{connection.dialOutState.state}}</span>
+        </div>
+        <div class="alert-actions">
+            <button type="button" class="button square" ng-click="connection.participantAddCancel()" ng-if="connection.dialOutState.state==='IDS_PARTICIPANT_ADD_CONNECTING' && !connection.dialOutState.waiting.length">
+                <span translate>IDS_BUTTON_CANCEL</span>
+            </button>
+            <button type="button" class="button square" ng-click="connection.participantAddIgnore();">
+                <span translate>IDS_BUTTON_CLOSE</span>
+            </button>
+        </div>
+    </form>
+</div>

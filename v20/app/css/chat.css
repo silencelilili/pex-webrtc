@@ -1,0 +1,115 @@
+.chat-container {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    top: 60%;
+    transition-property: top;
+    transition-duration: 0.5s;
+    font-size: smaller;
+}
+@media (max-width: 799px) {
+    .chat-header {
+        display: none;
+    }
+    .chat-container {
+        width: 100%;
+        top: -40px;
+        bottom: 40px;
+        display: none;
+    }
+    .chat-container.maximized {
+        display: block;
+    }
+}
+@media (min-width: 800px) {
+    .chat-container {
+        width: 300px;
+    }
+    .chat-container.minimized {
+        height: 40px;
+        top: auto;
+    }
+    .chat-container.maximized {
+        top: 72px;
+    }
+}
+.chat-header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    /*height: 32px;*/
+    overflow: hidden;
+}
+.chat-header span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 40px;
+    padding: 0 16px;
+    font-size: initial;
+}
+.chat-header .menu .button {
+    background-color: transparent;
+}
+.chat-messages {
+    padding: 8px 4px 8px 8px;
+    position: absolute;
+    left: 0;
+    top: 40px;
+    bottom: 32px;
+    overflow: auto;
+    box-sizing: border-box;
+    width: 100%;
+}
+.chat-message {
+    word-wrap: break-word;
+}
+.chat-message .timestamp {
+    font-size: xx-small;
+}
+.chat-message .origin {
+    font-weight: bold;
+}
+.chat-message .payload {
+    margin: 4px 0 4px 4px;
+    padding: 2px 4px;
+    border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
+}
+.chat-message video,
+.chat-message iframe,
+.chat-message img {
+    max-width: 100%;
+    margin: 2px 0;
+}
+.chat-form {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: white;
+    width: 100%;
+}
+.chat-form input {
+    display: block;
+    border: none;
+    padding: 8px;
+    margin: 0;
+    width: 100%;
+    height: 32px;
+    font-size: inherit;
+    line-height: initial;
+    box-sizing: border-box;
+    background-color: transparent;
+    border-top: 1px solid;
+}
+.chat-form input:focus{
+    outline: 0;
+}
+
+.chat-fullscreen {
+    top: 0;
+    bottom: 0;
+    position: fixed;
+    z-index: 1000;
+}

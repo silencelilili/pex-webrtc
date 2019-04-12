@@ -1,0 +1,27 @@
+<div class="chat-messages brand-secondary" id="chatdiv">
+    <div class="placeholder-text" ng-click="chat.focusInput()" ng-if="!chat.messages.length">
+        <h1>
+            <i class="mdi-forum"></i>
+        </h1>
+        <span style="white-space: pre" bindonce bo-bind="'IDS_CHAT_MESSAGES_PLACEHOLDER' | translate"></span>
+    </div>
+    <div bindonce class="chat-message" ng-repeat="message in chat.messages track by $index">
+        <div class="timestamp placeholder-text" bo-if="message.timestamp - chat.messages[$index-1].timestamp > 60000" bo-bind="message.timestamp | date:'shortTime'"></div>
+        <div class="origin" bo-if="chat.messages[$index-1].origin !== message.origin" bo-bind="message.origin"></div>
+        <div class="payload brand-tertiary" bo-title="message.timestamp | date:'medium'" bo-html="message.payload | enhanceText | unsafe"></div>
+    </div>
+</div>
+<form class="chat-form brand-secondary" ng-submit="chat.sendMessage(chatMessage); chatMessage=''">
+    <input id="chat-field" type="text" autocomplete="off" ng-attr-placeholder="{{'IDS_CHAT_INPUT_PLACEHOLDER' | translate}}" ng-model="chatMessage" />
+</form>
+<div class="chat-header brand-primary">
+    <span translate>IDS_CHAT</span>
+    <div class="menu">
+        <a href="" class="button" ng-click="chat.resetSeenMessages(); chat.chatSize = chat.chatSize - 1" ng-if="chat.chatSize > 0">
+            <i class="mdi-expand-more"></i>
+        </a>
+        <a href="" class="button" ng-click="chat.chatSize = chat.chatSize + 1" ng-if="chat.chatSize < 2">
+            <i class="mdi-expand-less"></i>
+        </a>
+    </div>
+</div>

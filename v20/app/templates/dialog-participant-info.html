@@ -1,0 +1,125 @@
+<div class="overlay-container brand-overlay" id="dialog-participant-info" toggle initial="false" ng-click="hide()">
+    <div pex-draggable class="overlay-content brand-secondary" ng-click="$event.stopPropagation()">
+        <div style="text-align:center">
+            <div class="participant-info-avatar">
+                <img ng-src="{{currentParticipant.getAvatarUrl(100, 100)}}" style="visibility: hidden" onload="this.style.visibility='visible'" onerror="this.style.visibility='hidden'" />
+            </div>
+            <div>
+                <div class="dialog-title">{{currentParticipant.displayName}}</div>
+                <div class="dialog-sub-title">{{currentParticipant.uri}}</div>
+            </div>
+        </div>
+        <div class="dialog-content">
+            <table style="width: 100%">
+                <tr ng-init="canChangeRole = connection.data.isChair && !currentParticipant.isSelf && !currentParticipant.isExternal">
+                    <td>
+                        <label translate>IDS_PARTICIPANT_ROLE</label>
+                    </td>
+                    <td ng-if="!canChangeRole">
+                        <span translate="IDS_PARTICIPANT_ROLE_{{currentParticipant.role}}"></span>
+                    </td>
+                    <td ng-if="canChangeRole">
+                        <label ng-repeat="(roleValue, roleString) in {chair: 'IDS_ROLE_HOST', guest: 'IDS_ROLE_GUEST'}">
+                            <span translate>{{roleString}}</span>
+                            <input class="sel-participant-role" type="radio" value="{{roleValue}}" ng-model="currentParticipant.role" ng-change="call.setRole(currentParticipant.uuid, currentParticipant.role);" />
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label translate>IDS_PARTICIPANT_CONNECTION_DURATION</label>
+                    </td>
+                    <td>
+                        <span title="{{currentParticipant.startTime | date:'medium'}}">{{currentParticipant.startTime | date:'HH:mm:ss'}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label translate>IDS_PARTICIPANT_PRESENTING</label>
+                    </td>
+                    <td>
+                        <span translate>{{currentParticipant.isPresenting | boolToHuman}}</span>
+                    </td>
+                </tr>
+                <tr ng-if="currentParticipant.isStreaming">
+                    <td>
+                        <label translate>IDS_PARTICIPANT_STREAMING</label>
+                    </td>
+                    <td>
+                        <span translate>{{currentParticipant.isStreaming | boolToHuman}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label translate>IDS_PARTICIPANT_PROTOCOL</label>
+                    </td>
+                    <td>
+                        <div title="{{currentParticipant.vendor}}" style="text-transform: uppercase">{{currentParticipant.protocol}}</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label translate>IDS_PARTICIPANT_ENCRYPTION</label>
+                    </td>
+                    <td>
+                        <span translate>{{currentParticipant.encryption}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="mute_participant" translate>IDS_PARTICIPANT_MUTED</label>
+                    </td>
+                    <td>
+                        <input class="sel-participant-muteparticipant" id="mute_participant" type="checkbox" ng-disabled="!connection.data.isChair || currentParticipant.isExternal" ng-model="currentParticipant.isMuted" ng-change="call.participantSetMute(currentParticipant, currentParticipant.isMuted)" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="deny_presentation" translate>IDS_PARTICIPANT_RX_PRESENTATION</label>
+                    </td>
+                    <td>
+                        <input class="sel-participant-denypresentation" id="deny_presentation" type="checkbox" ng-disabled="!connection.data.isChair || currentParticipant.isExternal" ng-model="currentParticipant.isRxPresentation" ng-change="call.participantSetRxPresentation(currentParticipant, currentParticipant.isRxPresentation)" />
+                    </td>
+                </tr>
+                <tr ng-if="connection.data.isChair && currentParticipant.hasMedia && !currentParticipant.isExternal">
+                    <td>
+                        <label translate>IDS_DIALPAD</label>
+                    </td>
+                    <td>
+                        <button class="sel-participant-dialpad" ng-click="hide(); toggle('dialog-dialpad', true)">
+                            <span translate>IDS_BUTTON_OPEN</span>
+                        </button>
+                    </td>
+                </tr>
+                <tr ng-if="connection.data.isChair && connection.data.feccEnabled && currentParticipant.hasMedia && currentParticipant.isFeccSupported">
+                    <td>
+                        <label translate>IDS_CAMERACONTROL</label>
+                    </td>
+                    <td>
+                        <button class="sel-participant-cameracontrol" ng-click="hide(); toggle('dialog-cameracontrol', true)">
+                            <span translate>IDS_BUTTON_OPEN</span>
+                        </button>
+                    </td>
+                </tr>
+                <tr ng-if="connection.data.isChair">
+                    <td>
+                        <label translate>IDS_PARTICIPANT_TRANSFER</label>
+                    </td>
+                    <td>
+                        <button class="sel-participant-transfer" ng-click="hide(); toggle('dialog-transfer', true)">
+                            <span translate>IDS_BUTTON_OPEN</span>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="alert-actions">
+            <a class="button square sel-participant-disconnect" href="" ng-click="hide(); connection.participantDisconnect(currentParticipant)" ng-if="connection.data.isChair && !currentParticipant.isExternal">
+                <span translate>IDS_PARTICIPANT_DISCONNECT</span>
+            </a>
+            <button type="button" class="button square sel-escalate-video-close" ng-click="hide()">
+                <span translate>IDS_BUTTON_CLOSE</span>
+            </button>
+        </div>
+    </div>
+</div>

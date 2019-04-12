@@ -1,0 +1,141 @@
+<div class="toolbar-buttons sel-toolbar">
+    <div ng-if="!hideSideBarButton" style="float:left;" ng-click="sideBar.toggle()">
+        <a title="{{'IDS_SIDEBAR_HIDE' | translate}}" href="" class="sel-sidebar-hide button ng-no-animate" ng-show="!sideBar.hidden" ng-class="{active: !chat.chatSize && chat.messages.length - chat.seenMessages}">
+            <i class="mdi-chevron-left"></i>
+            <div class="badge-container" ng-if="!chat.chatSize && chat.messages.length - chat.seenMessages">
+                <div class="sel-unseen-chat-messages badge blue">
+                    {{chat.messages.length - chat.seenMessages}}
+                </div>
+            </div>
+        </a>
+        <a title="{{'IDS_SIDEBAR_SHOW' | translate}}" href="" class="sel-sidebar-show button ng-no-animate" ng-show="sideBar.hidden" ng-class="{active: chat.messages.length - chat.seenMessages}">
+            <i class="mdi-chevron-right"></i>
+            <div class="badge-container" ng-if="chat.messages.length - chat.seenMessages">
+                <div class="sel-unseen-chat-messages badge blue">
+                    {{chat.messages.length - chat.seenMessages}}
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <span ng-show="!connection.connectingMedia && !connection.remoteAudioStream && !connection.remoteVideoStream">
+        <div style="position: relative; display: inline-block" ng-if="connection.data.remoteCallType != 'audio' && !platformSettings.isAndroidClient && connection.data.bandwidthIn > 64 && connection.data.bandwidthOut > 64">
+            <div title="{{'IDS_TOOLBAR_START_VIDEO' | translate}}" class="button blue sel-escalate-media-toolbar" ng-click="$event.stopPropagation(); toggle('popup-escalate')">
+                <i class="mdi-videocam"></i>
+            </div>
+            <div class="escalate-popup" title="" ng-include="'templates/escalate-preview.html'" ng-click="$event.stopPropagation()">
+            </div>
+        </div>
+        <div title="{{'IDS_TOOLBAR_START_VIDEO' | translate}}" class="button blue sel-escalate-media-toolbar" style="opacity: 1" ng-click="toggle('dialog-escalate')" ng-if="connection.data.remoteCallType != 'audio' && platformSettings.supportsVideo && platformSettings.isAndroidClient && connection.data.bandwidthIn > 64 && connection.data.bandwidthOut > 64">
+            <i class="mdi-videocam"></i>
+        </div>
+        <a title="{{'IDS_TOOLBAR_START_AUDIO_ONLY' | translate}}" href="" class="button blue sel-escalate-audio" ng-click="params.audioonly = true; startMediaCall()" ng-if="connection.data.bandwidthIn > 0 && connection.data.bandwidthOut > 0">
+            <i class="mdi-call"></i>
+        </a>
+    </span>
+
+    <span ng-click="call.toggleMicrophone()" ng-if="connection.localAudioStream">
+        <a title="{{'IDS_MICROPHONE_MUTE' | translate}}" href="" class="sel-microphone-mute button" ng-show="!call.microphoneMuted">
+            <i class="mdi-mic"></i>
+        </a>
+        <a title="{{'IDS_MICROPHONE_UNMUTE' | translate}}" href="" class="sel-microphone-unmute button" ng-class="{'active': micActivity}" ng-show="call.microphoneMuted">
+            <i class="mdi-moff"></i>
+        </a>
+    </span>
+
+    <span ng-click="connection.toggleCamera()" ng-if="connection.remoteVideoStream && connection.localVideoStream">
+        <a title="{{'IDS_CAMERA_DISABLE' | translate}}" href="" class="sel-camera-disable button" ng-show="!call.cameraMuted">
+            <i class="mdi-videocam"></i>
+        </a>
+        <a title="{{'IDS_CAMERA_ENABLE' | translate}}" href="" class="sel-camera-enable button" ng-show="call.cameraMuted">
+            <i class="mdi-videocam-off"></i>
+        </a>
+    </span>
+
+    <a title="{{'IDS_BUTTON_DISCONNECT' | translate }}" href="" class="sel-conference-disconnect red button" ng-click="toolbar.disconnect()">
+        <i class="mdi-call-end"></i>
+    </a>
+
+    <a title="{{'IDS_PRESENTATION_START' | translate}}" href="" class="sel-present-screen button" ng-click="startScreenShare()" ng-if="(!connection.data.remoteCallType || connection.data.remoteCallType == 'video') && connection.data.hasStartedMedia && (connection.data.isChair || (connection.data.guestsCanPresent === undefined || (!connection.data.isChair && connection.data.guestsCanPresent))) && platformSettings.screenshareSupported && !call.screenShareMode && connection.data.bandwidthOut > 64">
+        <!-- <i class="mdi-tv"></i> -->
+        <i class="mdi-personal-video"></i>
+    </a>
+    <a title="{{'IDS_SHARE_SLIDES' | translate}}" href="" class="sel-present-slides button" ng-click="toggle('dialog-slide-share')" ng-if="(!connection.data.remoteCallType || connection.data.remoteCallType == 'video') && connection.data.hasStartedMedia && (connection.data.isChair || (connection.data.guestsCanPresent === undefined || (!connection.data.isChair && connection.data.guestsCanPresent))) && !call.screenShareMode">
+        <i class="mdi-picture-as-pdf"></i>
+    </a>
+    <a title="{{'IDS_PRESENTATION_STOP' | translate}}" href="" class="sel-presentation-stop button" ng-click="call.stopScreenShare()" ng-if="call.screenShareMode" ng-switch="call.screenShareMode">
+        <!-- <i class="mdi-dvr"></i> -->
+        <!-- <i class="mdi-stop"></i> -->
+        <i class="mdi-ondemand-video" ng-switch-when="screen"></i>
+        <i class="mdi-video-collection" ng-switch-when="screen_http"></i>
+        <div class="badge-container">
+            <div class="badge blue">
+                <i class="mdi-play-arrow"></i>
+            </div>
+        </div>
+    </a>
+
+    <a title="{{'IDS_DIALPAD' | translate}}" href="" class="sel-toggle-dialpad button" ng-show="!stateParams.screen" ng-click="toggle('dialog-dialpad')" ng-if="((connection.remoteAudioStream || connection.remoteVideoStream) && (connection.data.isGateway || call.currentServiceType() == 'waiting_room'))">
+        <i class="mdi-dialpad"></i>
+    </a>
+
+    <a title="{{'IDS_CAMERACONTROL' | translate}}" href="" class="sel-toggle-cameracontrol button" ng-show="!stateParams.screen" ng-click="toggle('dialog-cameracontrol')" ng-if="connection.data.feccEnabled && connection.remoteVideoStream && connection.data.isGateway && (connection.participants | values | filter: {isConnecting: false}).length <= 2">
+        <i class="mdi-open-with"></i>
+    </a>
+
+    <div style="float: right;">
+        <div title="{{'IDS_VOLUME' | translate}}" class="button" ng-if="connection.remoteAudioStream && platformSettings.volumeControlsEnabled">
+            <i ng-class="{'mdi-volume-up': volume.value > 0.5, 'mdi-volume-down': volume.value > 0 && volume.value <= 0.5, 'mdi-volume-off': volume.value == 0}" ng-click="volume.toggleMute()"></i>
+            <div class="volume-popup">
+                <form class="arrow_box">
+                    <div ng-if="volume.setOutputDevice">
+                        <a title="{{'IDS_SELECT_AUDIO_OUTPUT' | translate}}" href="" class="transparent button" ng-click="toggle('dialog-select-output')" ng-if="connection.remoteAudioStream">
+                            <i class="mdi-settings"></i>
+                        </a>
+                    </div>
+                    <div>
+                        <input min="0" max="1" step="0.05" type="range" orient="vertical" ng-model="volume.value" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <a title="{{'IDS_CHANGE_MEDIA_SOURCES' | translate}}" class="sel-choose-media-toolbar button" ng-click="toggle('dialog-change-media')" ng-if="platformSettings.hasWebRTC && connection.data.bandwidthIn > 0 && connection.data.bandwidthOut > 0 && (connection.remoteAudioStream || connection.remoteVideoStream) && connection.data.renegotiationSupported">
+            <i class="mdi-switch-video"></i>
+        </a>
+
+        <a title="{{'IDS_CALL_STATISTICS' | translate}}" href="" class="sel-call-statistics button" ng-click="toggle('dialog-call-statistics')" ng-if="(connection.remoteAudioStream || connection.remoteVideoStream)">
+            <i class="mdi-info"></i>
+            <!-- <i class="mdi-tune"></i> -->
+        </a>
+
+        <span ng-if="!call.screenShareMode && call.presentationImgSrc && platformSettings.hasWebRTC && applicationSettings.enableFullMotionPresentation && connection.data.bandwidthIn > 64">
+            <a class="button sel-presentation-full-motion" title="{{'IDS_PRESENTATION_FULL_MOTION' | translate}}" href="" ng-click="call.startPresentationVideo()" ng-if="!call.presentationVideoSrc">
+                <!-- <i class="mdi-local-movies"></i> -->
+                <i class="mdi-hd"></i>
+            </a>
+            <a class="button sel-presentation-still-image" title="{{'IDS_PRESENTATION_STILL_IMAGE' | translate}}" href="" ng-click="call.stopPresentationVideo()" ng-if="call.presentationVideoSrc">
+                <!-- <i class="mdi-image"></i> -->
+                <i class="mdi-hd"></i>
+                <div class="badge-container">
+                    <div class="badge blue">
+                        <i class="mdi-play-arrow"></i>
+                    </div>
+                </div>
+            </a>
+        </span>
+
+        <a title="{{'IDS_PRESENTATION_POPOUT' | translate}}" href="" class="button" ng-click="popOutPresentation()" ng-if="call.presentationImgSrc && !call.presentationWindow">
+            <i class="mdi-open-in-new"></i>
+        </a>
+
+        <span ng-click="toggleFullScreen()" ng-if="fullScreen !== null && !platformSettings.isAndroidClient && !localStorage.autoFullscreen">
+            <a title="{{'IDS_FULLSCREEN_ACTIVATE' | translate}}" href="" class="sel-fullscreen-activate button" ng-show="!fullScreen">
+                <i class="mdi-fullscreen"></i>
+            </a>
+            <a title="{{'IDS_FULLSCREEN_DEACTIVATE' | translate}}" href="" class="sel-fullscreen-deactivate button" ng-show="fullScreen">
+                <i class="mdi-fullscreen-exit"></i>
+            </a>
+        </span>
+    </div>
+</div>

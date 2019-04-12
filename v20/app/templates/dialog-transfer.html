@@ -1,0 +1,28 @@
+<div class="overlay-container brand-overlay" id="dialog-transfer" toggle>
+    <form class="overlay-content brand-secondary" name="transferParticipantForm" ng-submit="transferParticipantForm.$valid && connection.participantTransfer(currentParticipant, conference_alias, role, pin) || hide()">
+        <div class="dialog-title" translate>IDS_PARTICIPANT_TRANSFER</div>
+        <div class="dialog-content">
+          <table>
+            <tr>
+              <td>
+                <input required type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="512" size="30" style="width: auto" focus-input ng-attr-placeholder="{{'IDS_PARTICIPANT_TRANSFER_ALIAS' | translate}}" ng-model="conference_alias" />
+              </td>
+              <td>
+                <select style="width: auto" ng-model="role" ng-init="role = currentParticipant.isChair ? 'host' : 'guest'" ng-options="value as (name | translate) for (value, name) in {guest: 'IDS_ROLE_GUEST', host: 'IDS_ROLE_HOST'}"></select>
+              </td>
+              <td>
+                <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="20" size="4" style="width: auto" ng-attr-placeholder="{{'IDS_CONNECT_PIN_LABEL' | translate}}" ng-model="pin" />
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="alert-actions">
+            <button type="button" class="button square" ng-click="hide()">
+                <span translate>IDS_BUTTON_CANCEL</span>
+            </button>
+            <button type="submit" class="button square">
+                <span translate>IDS_BUTTON_OK</span>
+            </button>
+        </div>
+    </form>
+</div>

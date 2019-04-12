@@ -1,0 +1,32 @@
+<div class="overlay-container brand-overlay sel-dialog-select-output" id="dialog-select-output" toggle>
+    <form class="overlay-content brand-secondary" ng-controller="UserMediaPreviewController">
+        <div class="dialog-title" translate>IDS_SELECT_AUDIO_OUTPUT</div>
+        <div class="dialog-content">
+            <div class="placeholder-text" ng-hide="mediaSources.output.length">
+                <div>
+                    <img src="img/spinner-black.svg" class="spinner" />
+                </div>
+                <span translate>IDS_ESCALATE_REQUESTING_ACCESS</span>
+            </div>
+            <div class="red login-error" ng-if="getUserMediaError" translate>
+                {{getUserMediaError | translate}}
+            </div>
+            <table style="width: 100%" ng-show="mediaSources.output.length">
+                <tr>
+                    <td>
+                        <select class="sel-escalate-output" ng-model="localStorage.audioOutputId" ng-options="source.id as (source.label | translate) for source in mediaSources.output" ng-change="volume.setOutputDevice()">
+                            <option value="" translate>IDS_SETTINGS_AUDIO_OUTPUT_DEFAULT</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="alert-actions">
+            <pex-test-audio></pex-test-audio>
+            <button type="button" class="button square sel-escalate-video-close" ng-click="hide()">
+                <span translate>IDS_BUTTON_CLOSE</span>
+            </button>
+        </div>
+    </form>
+</div>

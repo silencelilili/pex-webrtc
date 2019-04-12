@@ -1,0 +1,103 @@
+.app-bar {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition-property: top;
+    transition-duration: 0.2s;
+    width: 300px;
+    z-index: 1;
+}
+
+
+.app-bar-fullscreen {
+    max-width: 100%;
+    width: auto;
+}
+
+.app-bar .avatar,
+.app-bar .menu {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    margin: 16px;
+}
+
+.app-bar .menu {
+    right: 0;
+}
+
+.app-bar .name {
+    margin: 16px 64px 16px 72px;
+}
+
+.idle .app-bar-fullscreen {
+    top: -72px;
+}
+
+.app-bar .name,
+.side-bar-status .name {
+    font-weight: bold;
+}
+
+.app-bar-fullscreen .avatar {
+    box-shadow: 1px 1px 4px -1px black;
+}
+
+.app-bar-fullscreen .name,
+.app-bar-fullscreen .button {
+    text-shadow: 1px 1px 1px black;
+}
+
+@media (max-width: 799px) {
+    .idle .app-bar {
+        top: -72px;
+    }
+    .app-bar {
+        max-width: 100%;
+        width: auto;
+    }
+    .app-bar .avatar {
+        box-shadow: 1px 1px 4px black;
+    }
+    .app-bar .name,
+    .app-bar .button {
+        text-shadow: 1px 1px 1px black;
+    }
+}
+
+@media (min-width: 800px) {}
+
+.app-bar-submenu-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 40px;
+}
+
+.submenu-content {
+    display: inline-block;
+    margin: 16px;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, .2);
+    border-radius: 2px;
+    overflow: auto;
+}
+
+.submenu-content .brand-tertiary-hover {
+    display: block;
+    padding: 8px 16px;
+    white-space: nowrap;
+    font: inherit;
+    color: inherit;
+    text-decoration: none;
+}
+
+.submenu-content .brand-tertiary-hover i {
+    margin-right: 16px;
+}
+
+.brand-tertiary-hover {
+    cursor: pointer;
+}

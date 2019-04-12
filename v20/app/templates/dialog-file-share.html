@@ -1,0 +1,47 @@
+<div class="overlay-container brand-overlay" id="dialog-slide-share" toggle file-drop>
+    <div class="overlay-content brand-secondary">
+        <div class="dialog-title" translate>IDS_DIALOG_FILE_SHARE_TITLE</div>
+        <input id="input-slide-files" style="width:0; height: 0; overflow: hidden" type="file" multiple accept="application/pdf, .pdf, image/*" onchange="angular.element(this).scope().slideShare.addSlides(this.files); this.value=null;" />
+        <div class="alert-actions">
+            <button type="button" class="blue button square sel-slides-clear" ng-click="slideShare.deleteAllSlides()" ng-if="slideShare.slides.length">
+                <span translate>IDS_DIALOG_SLIDE_SHARE_CLEAR</span>
+            </button>
+            <button type="button" class="blue button square sel-slides-add" onclick="$('#input-slide-files').trigger('click')">
+                <span translate>IDS_DIALOG_FILE_SHARE_BUTTON_BROWSE</span>
+            </button>
+        </div>
+        <div class="dialog-content brand-tertiary image-list">
+            <div class="placeholder-text" ng-if="!slideShare.slides.length && slideShare.loadingSlideCount() < 1">
+                <a href="" onclick="$('#input-slide-files').trigger('click')">
+                    <h1>
+                        <i class="mdi-filter"></i>
+                        <i class="mdi-picture-as-pdf"></i>
+                        <!-- <i class="mdi-note-add"></i> -->
+                    </h1>
+                    <p translate>IDS_DIALOG_FILE_SHARE_TEXT</p>
+                </a>
+            </div>
+            <div class="slide-thumbnail sel-slides-thumbnail" ng-repeat="slide in slideShare.slides" ng-style="{'background-image': 'url('+slide.objectURL+')'}">
+                <div class="slide-delete" ng-click="slideShare.deleteSlide($index)">
+                    <i class="mdi-delete"></i>
+                </div>
+                <div class="badge-container">
+                    <div class="badge blue">
+                        {{$index + 1}}
+                    </div>
+                </div>
+            </div>
+            <div class="slide-thumbnail" ng-if="slideShare.loadingSlideCount() > 0">
+                <img src="img/spinner-black.svg" style="opacity: .5; margin: 20px auto" class="spinner" />
+            </div>
+        </div>
+        <div class="alert-actions">
+            <button type="button" class="button square sel-slides-cancel" ng-click="hide(); slideShare.cancelUpload();">
+                <span translate>IDS_BUTTON_CANCEL</span>
+            </button>
+            <button type="button" class="button square sel-slides-start" ng-click="slideShare.start(); hide()" ng-if="slideShare.slides.length">
+                <span translate>IDS_DIALOG_FILE_SHARE_BUTTON_SHARE</span>
+            </button>
+        </div>
+    </div>
+</div>

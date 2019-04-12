@@ -1,0 +1,26 @@
+.media-statistics-table td,
+.mediastats-footer {
+    text-align: center;
+}
+.media-statistics-direction {
+    font-size: large;
+    font-weight: bold;
+}
+.media-statistics-media-type {
+    font-weight: bold;
+    margin: 16px 0 8px 0;
+}
+.media-statistics-data {
+    /*margin: 16px;*/
+}
+.media-statistics-data table {
+    width: 100%;
+    font-size: smaller;
+}
+.media-statistics-data tr td:first-of-type {
+    text-align: left;
+}
+.media-statistics-data tr td:nth-of-type(2) {
+    padding-left: 16px;
+    text-align: right;
+}

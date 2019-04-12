@@ -1,0 +1,52 @@
+<form class="arrow_box" style="margin: 0" ng-init="flashPreviewId = 'flash-popup-preview-video'" ng-controller="UserMediaPreviewController" id="popup-escalate" toggle>
+    <div class="video-preview" style="display: block" ng-if="platformSettings.hasWebRTC && !getUserMediaError">
+        <video muted autoplay playsinline ng-src="{{localMediaStreamURL}}" ng-if="platformSettings.hasWebRTC" pex-localstream />
+        <div class="name" style="line-height: 20px" ng-show="mediaSources.audio || mediaSources.video">
+            <a title="" href="" class="transparent button sel-open-media-settings" style="float: right; box-shadow: none" ng-click="hide(); toggle('dialog-escalate')">
+                <i class="mdi-settings"></i>
+            </a>
+            <div style="overflow: hidden; text-overflow: ellipsis;">
+                <i class="mdi-videocam"></i>
+                <span translate>{{videoStreamName}}</span>
+            </div>
+            <div style="overflow: hidden; text-overflow: ellipsis;">
+                <i class="mdi-mic"></i>
+                <span translate>{{audioStreamName}}</span>
+            </div>
+        </div>
+        <div class="placeholder-text" ng-hide="mediaSources.audio || mediaSources.video">
+            <div>
+                <img src="img/spinner-white.svg" class="spinner" />
+            </div>
+            <span translate>IDS_ESCALATE_REQUESTING_ACCESS</span>
+        </div>
+    </div>
+    <div class="red video-preview" style="display: block" ng-if="getUserMediaError" translate>
+        {{getUserMediaError | translate}}
+    </div>
+    <div class="video-preview" style="display: block; height: 180px;" ng-if="!platformSettings.hasWebRTC">
+        <table id="flash-popup-preview-placeholder" ng-show="!flashVideo.hasFlashInstalled()" style="width: 100%; height: 100%">
+            <tr>
+                <td>
+                    <div class="placeholder-text">
+                        <div>To view this page ensure that Adobe Flash Player version 11.1.0 or greater is installed.</div>
+                        <a href="http://www.adobe.com/go/getflashplayer">
+                            <img src="https://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div swf-object flash-id="flash-popup-preview-video" replace-id="flash-popup-preview-placeholder" ref-id="/static/webrtc/flash/PexVideo.swf" width="100%" height="100%"></div>
+        <div class="self-view-toolbar" ng-click="hide(); toggle('dialog-escalate')">
+            <a title="" href="" class="button sel-open-media-settings" style="box-shadow: none">
+                <i class="mdi-settings"></i>
+            </a>
+        </div>
+    </div>
+    <div class="alert-actions" style="text-align: center; margin: 8px" ng-show="mediaSources.audio || mediaSources.video">
+        <button type="button" class="button square sel-escalate-start" style="box-shadow: none; margin: 0" ng-click="hide(); startMediaCall()">
+            <span translate>IDS_ESCALATE_BUTTON_START</span>
+        </button>
+    </div>
+</form>

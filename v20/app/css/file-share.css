@@ -1,0 +1,97 @@
+.image-list {
+    max-height: 50vh;
+    max-width: 680px;
+    overflow: auto;
+    line-height: 0;
+    border: 1px solid;
+    text-align: center;
+    padding: 8px;
+    border-radius: 2px;
+    position: relative;
+    white-space: normal;
+}
+
+.slide-thumbnail {
+    position: relative;
+    display: inline-block;
+    width: 160px;
+    height: 90px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin: 4px;
+    border-radius: 2px;
+    /*background-color: black;*/
+}
+
+.image-list > img {
+    display: block;
+    width: 100%;
+}
+
+.slide-delete {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #212121;
+    opacity: .87;
+    line-height: 90px;
+    font-size: 32px;
+    text-align: center;
+    text-shadow: 1px 1px 1px black;
+    color: white;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.slide-thumbnail:hover .slide-delete {
+    display: block;
+}
+
+.slides-loading {
+    text-align: center;
+    overflow: visible;
+}
+
+.spinner {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 1s infinite linear;
+    -moz-animation: spin 1s infinite linear;
+    animation: spin infinite linear 1s;
+}
+
+@-moz-keyframes spin {
+    from {
+        -moz-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -moz-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

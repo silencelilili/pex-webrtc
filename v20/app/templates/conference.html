@@ -1,0 +1,130 @@
+<div class="side-bar brand-secondary sel-side-bar" ng-class="{hidden: sideBar.hidden, 'chat-minimized': chat.chatSize === 0 || !chat.enabled(), 'chat-maximized': chat.chatSize === 2}" ng-if="connection.data">
+    <div class="side-bar-status brand-primary"></div>
+
+    <div class="side-bar-list sel-participant-list" ng-include="'templates/participant-list.html'" ng-class="chat.enabled() ? ['maximized', 'split', 'minimized'][chat.chatSize] : 'maximized'" ng-if="!connection.data.isGateway || (connection.participants | values | filter: {isConnecting: false}).length > 2"></div>
+    <div class="placeholder-text" style="font-size: smaller" ng-if="connection.data.isGateway && (connection.participants | values | filter: {isConnecting: false}).length <= 2">
+        <h1><i class="mdi-info-outline"></i></h1>
+        <p translate>IDS_CONFERENCE_GATEWAY_INFO_MESSAGE</p>
+    </div>
+
+    <div class="chat-container" ng-include="'templates/chat.html'" ng-show="chat.enabled()" ng-class="['minimized', null, 'maximized'][chat.chatSize]"></div>
+    <table class="side-bar-tabs brand-primary">
+        <tr>
+            <td class="button square" ng-class="{'blue': chat.chatSize <= 1}" ng-click="chat.resetSeenMessages(); chat.chatSize=0">
+                <span translate>IDS_PARTICIPANTS</span>
+            </td>
+            <td class="button square" ng-class="{'blue': chat.chatSize > 1}" ng-click="chat.resetSeenMessages(); chat.chatSize=2" ng-if="chat.enabled()">
+                <span translate>IDS_CHAT</span>
+                <span style="font-size: 10px; line-height: 10px;" class="badge blue" ng-if="chat.chatSize !== 2 && chat.messages.length - chat.seenMessages">{{chat.messages.length - chat.seenMessages}}</span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="stage noselect sel-conference-stage" ng-class="{'fullscreen': sideBar.hidden}" ng-style="{opacity: 1}" aspect-watcher ng-click="toggle('popup-escalate', false)" ng-if="connection.data">
+    <div class="stage-background-container stage-background"></div>
+    <div class="main-pip" ng-if="!connection.connectingMedia && !connection.remoteVideoStream">
+        <div class="virtual-stage">
+            <div class="stage-placeholder" ng-if="!connection.data.isGateway && !(call.presentationImgSrc || call.presentationVideoSrc) && call.currentServiceType() !== 'waiting_room' && connection.data.remoteCallType != 'audio'">
+                <h1><i class="mdi-tv"></i></h1>
+                <span translate>IDS_STAGE_PLACEHOLDER</span>
+            </div>
+            <div class="stage-placeholder" ng-if="!connection.data.isGateway && !(call.presentationImgSrc || call.presentationVideoSrc) && call.currentServiceType() !== 'waiting_room' && connection.data.remoteCallType == 'audio'">
+                <h1><i class="mdi-phone"></i></h1>
+                <span translate>IDS_STAGE_AUDIO_PLACEHOLDER</span>
+            </div>
+            <div class="stage-placeholder" ng-if="call.currentServiceType() === 'waiting_room'">
+                <h1><i class="mdi-person"></i></h1>
+                <span translate>IDS_STAGE_WAITING_ROOM_PLACEHOLDER</span>
+            </div>
+            <div class="stage-placeholder" ng-if="connection.data.isGateway && (!connection.remoteAudioStream)">
+                <h1><i class="mdi-ring-volume"></i></h1>
+                <span translate>IDS_STAGE_GATEWAY_PLACEHOLDER</span>
+            </div>
+            <div class="stage-placeholder" ng-if="connection.data.isGateway && (connection.remoteAudioStream) && connection.data.remoteCallType != 'audio'">
+                <h1><i class="mdi-tv"></i></h1>
+                <span translate>IDS_STAGE_PLACEHOLDER</span>
+            </div>
+            <div class="stage-placeholder" ng-if="connection.data.isGateway && (connection.remoteAudioStream) && connection.data.remoteCallType == 'audio'">
+                <h1><i class="mdi-phone"></i></h1>
+                <span translate>IDS_STAGE_AUDIO_PLACEHOLDER</span>
+            </div>
+        </div>
+        <!-- <div class="virtual-stage" virtual-stage connection="connection"></div> -->
+    </div>
+
+    <audio autoplay ng-src="{{connection.remoteAudioStream}}" ng-if="platformSettings.hasWebRTC && !connection.remoteVideoStream && connection.remoteAudioStream" class="sel-audio" pex-volume="volume.value" set-output-device="volume.setOutputDevice" pex-srcobject="remoteAudioStream" />
+    <div ng-click="call.presentationMaximized = false" ng-class="(call.presentationMaximized && !call.presentationWindow && (call.presentationImgSrc || call.presentationVideoSrc)) ? 'left-pip' : 'main-pip'">
+        <video autoplay playsinline ng-src="{{connection.remoteVideoStream}}" ng-if="platformSettings.hasWebRTC && connection.remoteVideoStream" class="sel-main-video" pex-volume="volume.value" set-output-device="volume.setOutputDevice" pex-srcobject="remoteVideoStream"/>
+
+        <div ng-if="!platformSettings.hasWebRTC && useFlash" ng-cloak>
+            <div id="flashContent" class="sel-main-video overlay-container brand-overlay">
+                <div class="overlay-content">
+                </div>
+            </div>
+            <div swf-object flash-id="flashvideo" replace-id="flashContent" ref-id="/static/webrtc/flash/PexVideo.swf" width="100%" height="100%"></div>
+        </div>
+
+        <img class="presentation-image" src="img/video-spinner.svg" ng-if="connection.connectingMedia && !connection.remoteVideoStream" />
+    </div>
+
+    <div ng-class="(call.presentationMaximized && !call.presentationWindow) ? 'main-pip' : 'left-pip'" ng-click="call.presentationMaximized = true" ng-if="!call.presentationWindow && (call.presentationImgSrc || call.presentationVideoSrc)">
+        <video autoplay playsinline ng-src="{{call.presentationVideoSrc}}" ng-if="platformSettings.hasWebRTC && call.presentationVideoSrc" class="sel-presentation-hd" pex-srcobject="presentationVideoSrc" />
+        <img class="presentation-image sel-presentation-jpeg" ng-src="{{call.presentationImgSrc}}" onerror="this.src='img/video-spinner.svg'" ng-if="call.presentationImgSrc && !call.presentationVideoSrc" />
+        <div class="presentation-toolbar" ng-click="$event.stopPropagation()" ng-if="call.screenShareMode === 'screen_http' && slideShare.slides.length > 1">
+            <span class="button-group">
+                <a class="button" title="{{'IDS_PRESENTATION_SLIDE_PREVIOUS' | translate}}" href="" ng-click="slideShare.previousSlide()">
+                    <!-- <i class="mdi-skip-previous"></i> -->
+                    <i class="mdi-navigate-before"></i>
+                </a>
+                <span class="slide-counter">{{slideShare.currentSlide + 1}} / {{slideShare.slides.length}}</span>
+                <a class="button" title="{{'IDS_PRESENTATION_SLIDE_NEXT' | translate}}" href="" ng-click="slideShare.nextSlide()">
+                    <!-- <i class="mdi-skip-next"></i> -->
+                    <i class="mdi-navigate-next"></i>
+                </a>
+            </span>
+        </div>
+        <div class="name">{{call.presentationName}}</div>
+    </div>
+
+    <div class="right-pip" ng-if="connection.localVideoStream">
+        <div class="crop-16-9" ng-show="!selfView.hidden" ng-if="platformSettings.hasWebRTC" ng-click="selfView.toggle()">
+            <video muted autoplay playsinline ng-src="{{connection.localVideoStream}}" class="sel-selfview-video" pex-srcobject="localVideoStream" />
+            <img src="img/camera-off.svg" ng-show="call.cameraMuted">
+        </div>
+        <div class="self-view-toolbar" ng-click="selfView.toggle()">
+            <a title="{{'IDS_SELFVIEW_HIDE' | translate}}" href="" class="button sel-selfview-hide" ng-show="!selfView.hidden">
+                <i class="mdi-remove-circle"></i>
+            </a>
+            <a title="{{'IDS_SELFVIEW_SHOW' | translate}}" href="" class="button sel-selfview-show" ng-show="selfView.hidden">
+                <i class="mdi-picture-in-picture"></i>
+            </a>
+        </div>
+    </div>
+
+    <div ng-include="'templates/dialog-call-statistics.html'"></div>
+    <div ng-include="'templates/dialog-dialpad.html'"></div>
+    <div ng-include="'templates/dialog-cameracontrol.html'"></div>
+    <div ng-include="'templates/dialog-select-output.html'"></div>
+
+    <div class="toolbar" ng-include="'templates/toolbar.html'"></div>
+</div>
+
+<div class="app-bar" ng-class="{'app-bar-fullscreen': sideBar.hidden}" ng-include="'templates/app-bar.html'" ng-if="connection.data"></div>
+
+
+<div class="overlay-container brand-overlay" ng-repeat="plugin in plugins" ng-if="plugin.open" ng-click="plugin.open = false">
+    <div class="overlay-content brand-secondary" ng-include="plugin.template"></div>
+</div>
+
+<div ng-include="'templates/dialog-dial-out-progress.html'" ng-if="connection.dialOutState"></div>
+
+<div ng-include="'templates/dialog-change-media.html'"></div>
+<div ng-include="'templates/dialog-content-share.html'"></div>
+<div ng-include="'templates/dialog-file-share.html'"></div>
+<div ng-include="'templates/dialog-dial-out.html'"></div>
+<div ng-include="'templates/dialog-screen-share-missing.html'"></div>
+<div ng-include="'templates/dialog-disconnect.html'"></div>
+<div ng-include="'templates/dialog-participant-info.html'"></div>
+<div ng-include="'templates/dialog-guest-mute.html'"></div>
+<div ng-include="'templates/dialog-transfer.html'"></div>

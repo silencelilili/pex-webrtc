@@ -1,0 +1,191 @@
+<div class="side-bar-list-item brand-tertiary brand-tertiary-hover" ng-click="loginApp(params.conference, localStorage.name)" ng-if="params.conference">
+    <div class="menu" style="display: block">
+        <ul class="dropdown">
+            <li>
+                <button type="button" class="square transparent button" style="height: 40px">
+                    <span ng-if="params.media && !params.audioonly">
+                        <i class="mdi-call"></i>
+                        <i class="mdi-videocam"></i>
+                    </span>
+                    <span ng-if="params.media && params.audioonly">
+                        <i class="mdi-call"></i>
+                        <i class="mdi-videocam disabled"></i>
+                    </span>
+                    <span ng-if="!params.media">
+                        <i class="mdi-call disabled"></i>
+                        <i class="mdi-videocam disabled"></i>
+                    </span>
+                    <!-- <i class="mdi-arrow-drop-down"></i> -->
+                </button>
+                <div class="dropdown-menu" style="margin: 0">
+                    <div class="submenu-content brand-tertiary sel-connect-dropdown" style="margin: 4px 0 0 0">
+                        <a href="" class="brand-tertiary-hover sel-join-video" ng-click="params.media=true; params.audioonly=false" title="{{'IDS_TOOLBAR_START_VIDEO' | translate}}">
+                            <i class="mdi-call"></i>
+                            <i class="mdi-videocam"></i>
+                        </a>
+                        <a href="" class="brand-tertiary-hover sel-join-audio" ng-click="params.media=true; params.audioonly=true" title="{{'IDS_TOOLBAR_START_AUDIO_ONLY' | translate}}">
+                            <i class="mdi-call"></i>
+                            <i class="mdi-videocam disabled"></i>
+                        </a>
+                        <a href="" class="brand-tertiary-hover sel-join" ng-click="params.media=false; params.audioonly=false" title="{{'IDS_TOOLBAR_START' | translate}}">
+                            <i class="mdi-call disabled"></i>
+                            <i class="mdi-videocam disabled"></i>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="transparent button" style="float: left; margin-right: 16px">
+        <i class="mdi-settings-phone"></i>
+    </div>
+    <div class="participant-list-name">
+        {{params.conference}}
+    </div>
+    <div class="participant-list-name-detail" translate>
+        IDS_HISTORY_NEW_PLACEHOLDER
+    </div>
+</div>
+
+<div class="side-bar-list-item brand-tertiary" ng-if="!callHistory.values.length && !params.conference">
+    <div class="transparent button" style="float: left; margin-right: 16px">
+        <i class="mdi-history"></i>
+    </div>
+    <!-- <i class="mdi-history transparent button" style="float: left"></i> -->
+    <div class="name" translate>
+        IDS_HISTORY_PLACEHOLDER
+    </div>
+    <!-- <div class="participant-list-name-detail">
+        Call and add to history
+    </div> -->
+</div>
+
+<div class="side-bar-list-item brand-tertiary brand-tertiary-hover" ng-repeat="item in callHistory.values | filter:params.conference | orderBy:'timestamp':true" ng-click="loginApp(item.alias, localStorage.name)" ng-dblclick="$event.stopPropagation()" history-entry="{{item.alias}}">
+    <div class="menu">
+        <ul class="dropdown">
+            <li>
+                <button type="button" class="square transparent button" style="height: 40px">
+                    <span ng-if="params.media && !params.audioonly">
+                        <i class="mdi-call"></i>
+                        <i class="mdi-videocam"></i>
+                    </span>
+                    <span ng-if="params.media && params.audioonly">
+                        <i class="mdi-call"></i>
+                        <i class="mdi-videocam disabled"></i>
+                    </span>
+                    <span ng-if="!params.media">
+                        <i class="mdi-call disabled"></i>
+                        <i class="mdi-videocam disabled"></i>
+                    </span>
+                    <!-- <i class="mdi-arrow-drop-down"></i> -->
+                </button>
+                <div class="dropdown-menu" style="margin: 0">
+                    <div class="submenu-content brand-tertiary sel-connect-dropdown" style="margin: 4px 0 0 0">
+                        <a href="" class="brand-tertiary-hover sel-join-video" ng-click="params.media=true; params.audioonly=false" title="{{'IDS_TOOLBAR_START_VIDEO' | translate}}">
+                            <i class="mdi-call"></i>
+                            <i class="mdi-videocam"></i>
+                        </a>
+                        <a href="" class="brand-tertiary-hover sel-join-audio" ng-click="params.media=true; params.audioonly=true" title="{{'IDS_TOOLBAR_START_AUDIO_ONLY' | translate}}">
+                            <i class="mdi-call"></i>
+                            <i class="mdi-videocam disabled"></i>
+                        </a>
+                        <a href="" class="brand-tertiary-hover sel-join" ng-click="params.media=false; params.audioonly=false" title="{{'IDS_TOOLBAR_START' | translate}}">
+                            <i class="mdi-call disabled"></i>
+                            <i class="mdi-videocam disabled"></i>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="avatar" ng-if="item.type != 'calendar'">
+        <img ng-src="{{applicationSettings.overrideConferenceAvatar || item.avatarUrl}}" onerror="this.style.display='none'" />
+        <div class="badge-container">
+            <div class="badge green" ng-if="item.status === 'outgoing'">
+                <i class="mdi-call-made"></i>
+            </div>
+            <div class="badge red" ng-if="item.status === 'missed'">
+                <i class="mdi-call-missed"></i>
+            </div>
+            <div class="badge green" ng-if="item.status === 'incoming'">
+                <i class="mdi-call-received"></i>
+            </div>
+        </div>
+    </div>
+    <div class="calendar-avatar" ng-if="item.type == 'calendar'">
+        <i class="mdi-today"></i>
+    </div>
+    <div class="participant-list-name" ng-if="item.type != 'calendar'">
+        {{item.alias}}
+    </div>
+    <div class="participant-list-name" ng-if="item.type == 'calendar'">
+        {{item.title}}
+    </div>
+    <div class="participant-list-name-detail" ng-if="item.type != 'calendar'">
+        {{item.timestamp | date:'medium' }}
+    </div>
+    <div class="participant-list-name-detail" ng-if="item.type == 'calendar'">
+        {{item.alias}}
+    </div>
+</div>
+
+<div ng-if="platformSettings.isDesktopClient" ng-controller="DirectoryController">
+  <div class="side-bar-list-item brand-tertiary brand-tertiary-hover"
+       ng-repeat="item in directoryResults"
+       ng-click="loginApp(item.alias, localStorage.name)"
+       ng-dblclick="$event.stopPropagation()"
+       history-entry="{{item.alias}}">
+    <div class="menu">
+      <ul class="dropdown">
+        <li>
+          <button type="button" class="square transparent button" style="height: 40px">
+            <span ng-if="params.media && !params.audioonly">
+              <i class="mdi-call"></i>
+              <i class="mdi-videocam"></i>
+            </span>
+            <span ng-if="params.media && params.audioonly">
+              <i class="mdi-call"></i>
+              <i class="mdi-videocam disabled"></i>
+            </span>
+            <span ng-if="!params.media">
+              <i class="mdi-call disabled"></i>
+              <i class="mdi-videocam disabled"></i>
+            </span>
+            <!-- <i class="mdi-arrow-drop-down"></i> -->
+          </button>
+          <div class="dropdown-menu" style="margin: 0">
+            <div class="submenu-content brand-tertiary sel-connect-dropdown" style="margin: 4px 0 0 0">
+              <a href="" class="brand-tertiary-hover sel-join-video" ng-click="params.media=true; params.audioonly=false" title="{{'IDS_TOOLBAR_START_VIDEO' | translate}}">
+                <i class="mdi-call"></i>
+                <i class="mdi-videocam"></i>
+              </a>
+              <a href="" class="brand-tertiary-hover sel-join-audio" ng-click="params.media=true; params.audioonly=true" title="{{'IDS_TOOLBAR_START_AUDIO_ONLY' | translate}}">
+                <i class="mdi-call"></i>
+                <i class="mdi-videocam disabled"></i>
+              </a>
+              <a href="" class="brand-tertiary-hover sel-join" ng-click="params.media=false; params.audioonly=false" title="{{'IDS_TOOLBAR_START' | translate}}">
+                <i class="mdi-call disabled"></i>
+                <i class="mdi-videocam disabled"></i>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="avatar">
+      <img ng-src="{{applicationSettings.overrideConferenceAvatar || item.avatarUrl}}" onerror="this.style.display='none'" />
+    </div>
+    <div class="participant-list-name">
+      {{item.alias}}
+    </div>
+    <div class="participant-list-name-detail">
+      {{item.description || "&nbsp;"}}
+    </div>
+  </div>
+  <div>
+    <img src="img/spinner-black.svg" class="spinner" ng-if="directoryPending" />
+  </div>
+
+</div>

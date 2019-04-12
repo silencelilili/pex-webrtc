@@ -1,0 +1,79 @@
+.brand-logo {
+    background-color: transparent;
+}
+
+.brand-logo:before {
+  content: url(logo.png);
+}
+
+.brand-background {
+    background-image: url(background.jpg);
+    background-size: cover;
+    background-position: center top;
+    background-color: #212121;
+    color: white;
+}
+
+.brand-primary {
+    background-color: #212121;
+    color: white;
+    border-color: #212121;
+    border-width: 1px;
+}
+
+.brand-secondary,
+.brand-tertiary-hover:hover {
+    background-color: #F5F5F5;
+    color: #212121;
+    border-color: #E0E0E0;
+    border-width: 1px;
+}
+
+.brand-tertiary,
+input[type="text"],
+input[type="password"],
+select {
+    background-color: white;
+    border-color: #E0E0E0;
+    color: #212121;
+}
+
+.stage-background {
+    background-color: #000;
+    opacity: .8;
+}
+
+.black,
+.button {
+    color: white;
+    background-color: #212121;
+}
+.white {
+    color: #212121;
+    background-color: white;
+}
+input.ng-dirty.ng-invalid,
+select.ng-dirty.ng-invalid {
+    border-color: #F44336;
+    background-color: #FFCDD2;
+}
+.red {
+    background-color: #F44336;
+    color: white;
+}
+.green {
+    background-color: #4CAF50;
+    color: white;
+}
+.green.transparent {
+    background-color: transparent;
+    color: #4CAF50;
+}
+.blue {
+    background-color: #2196F3;
+    color: white;
+}
+.gray {
+    background-color: #757575;
+    color: white;
+}

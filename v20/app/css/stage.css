@@ -1,0 +1,377 @@
+.stage {
+    position: absolute;
+    left: 300px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition-property: left, opacity;
+    transition-duration: .5s;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+    color: #FAFAFA;
+}
+
+.stage-background-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.stage.fullscreen {
+    left: 0;
+}
+
+@media (max-width: 799px) {
+    .stage {
+        left: 0;
+        top: 0;
+        right: 0;
+        height: 272px;
+        bottom: auto;
+        transition-property: opacity;
+        /*transition-duration: 0s;*/
+    }
+    .stage.fullscreen {
+        display: block;
+        height: auto;
+        bottom: 0;
+    }
+}
+
+@media (min-width: 800px) {
+    .stage {}
+}
+
+.toolbar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    word-spacing: 4px;
+}
+
+.toolbar .button,
+.toolbar .button-like {
+    transition: bottom 0.2s;
+    bottom: 0;
+}
+
+.idle .toolbar:not(:hover) .button,
+.idle .toolbar:not(:hover) .button-like {
+    bottom: -56px;
+}
+
+.idle .toolbar:not(:hover) .button.active,
+.idle .toolbar:not(:hover) .button-like.active {
+    bottom: 0;
+}
+
+.toolbar .toolbar-buttons {
+    margin: 16px;
+}
+
+.toolbar .button,
+.app-bar.fullscreen .avatar,
+.dialpad-buttons .button {
+    box-shadow: 1px 1px 4px black;
+}
+
+.cameracontrol-buttons .button {
+    box-shadow: 1px 1px 4px black;
+}
+
+.main-pip {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    max-height: 100%;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.main-pip:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em;
+}
+
+.main-pip .presentation-image,
+.main-pip video,
+.main-pip .video-poster,
+.main-pip svg,
+.main-pip .virtual-stage,
+.main-pip #flashvideo {
+    display: inline-block;
+    /*width: 100%;*/
+
+    vertical-align: middle;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background-color: inherit;
+}
+
+.main-pip .presentation-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.wide-aspect .main-pip .presentation-image,
+.wide-aspect .main-pip video,
+.wide-aspect .main-pip svg {
+    height: 100%;
+}
+
+.narrow-aspect .main-pip .presentation-image,
+.narrow-aspect .main-pip video,
+.narrow-aspect .main-pip svg,
+.narrow-aspect .main-pip .virtual-stage {
+    width: 100%;
+}
+
+.left-pip,
+.right-pip {
+    top: 0;
+    border-radius: 2px;
+    margin: 16px;
+    position: absolute;
+    box-shadow: 1px 1px 8px black;
+}
+
+.left-pip {
+    z-index: 1;
+    left: 0;
+    cursor: pointer;
+}
+
+.right-pip {
+    right: 0;
+}
+
+.mirrored {
+    -webkit-transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.presentation-toolbar,
+.self-view-toolbar {
+    position: absolute;
+    transition-property: opacity;
+    transition-duration: 0.5s;
+}
+
+.main-pip .presentation-toolbar {
+    margin: 16px;
+    top: 0;
+}
+
+.presentation-toolbar {
+    left: 0;
+    right: 0;
+    margin: 8px;
+    z-index: 2;
+}
+
+.self-view-toolbar {
+    right: 0;
+    top: 0;
+}
+
+.presentation-toolbar .button-group {
+    background-color: black;
+    background-color: rgba(0, 0, 0, .5);
+    display: inline-block;
+    border-radius: 20px;
+}
+
+.presentation-toolbar .button,
+.self-view-toolbar .button {
+    margin: 0;
+    background-color: transparent;
+    text-shadow: 1px 1px 1px black;
+}
+/*.idle .presentation-toolbar,*/
+
+.idle .self-view-toolbar {
+    opacity: 0;
+}
+
+.wide-aspect .left-pip,
+.wide-aspect .right-pip {
+    width: 200px;
+    /*max-width: 25%;*/
+}
+
+.narrow-aspect .left-pip,
+.narrow-aspect .right-pip {
+    width: 200px;
+    /*max-width: 45%;*/
+}
+
+#flashvideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.left-pip #flashvideo {
+    width: 200px;
+    height: 112px;
+}
+
+.left-pip .presentation-image,
+.left-pip video,
+.left-pip svg,
+.right-pip .presentation-image,
+.right-pip video,
+.right-pip svg {
+    display: block;
+    width: 100%;
+    -webkit-border-radius: 2px;
+}
+
+.crop-16-9 {
+    position: relative;
+    width: 200px;
+    height: 112px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.crop-16-9 video {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) scaleX(-1);
+}
+.crop-16-9 img {
+    display: block;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+}
+
+.video-preview .name,
+.main-pip .name,
+.left-pip .name,
+.right-pip .name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 4px;
+}
+
+.video-preview .name,
+.main-pip .name,
+.left-pip .name,
+.right-pip .name,
+.slide-counter {
+    opacity: .87;
+    text-shadow: 1px 1px 1px black;
+    text-align: left;
+    font-size: smaller;
+    line-height: normal;
+}
+
+.stage-placeholder {
+    opacity: .3;
+}
+
+.stage-placeholder img {
+    width: 15%;
+    margin: 16px;
+}
+
+.escalate-bar,
+.escalate-bar-minimized {
+    position: absolute;
+    padding: 4px;
+    border-radius: 2px;
+    vertical-align: middle;
+    transition-property: all;
+    transition-duration: 0.2s;
+}
+
+.escalate-bar {
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+.escalate-bar-minimized {
+    top: 0;
+    bottom: auto;
+    /*width: 200px;*/
+
+    left: 0;
+    right: 0;
+    padding: 4px;
+    margin: 8px;
+}
+
+.escalate-bar span,
+.escalate-bar-minimized span {
+    margin: 8px 0;
+}
+
+.escalate-bar a,
+.escalate-bar-minimized a {
+    font-size: smaller;
+    font-weight: bold;
+    padding: 4px 8px;
+    margin: 4px;
+    border-radius: 2px;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+}
+
+.escalate-bar-minimized a {
+    background-color: rgba(0, 0, 0, .2);
+}
+
+input[type=range][orient=vertical] {
+    writing-mode: bt-lr;
+    /* IE */
+
+    -webkit-appearance: slider-vertical;
+    /* WebKit */
+
+    width: 40px;
+    height: 80px;
+    padding: 0;
+    margin: 8px 0;
+}
+
+.volume-popup {
+    display: none;
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    width: 40px;
+    cursor: default;
+    text-transform: none;
+    text-shadow: none;
+}
+
+.button:hover .volume-popup {
+    display: block;
+}

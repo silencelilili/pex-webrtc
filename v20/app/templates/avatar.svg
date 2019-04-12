@@ -1,0 +1,13 @@
+<svg viewbox="0 0 40 40">
+    <circle cx="20" cy="20" r="20" fill="{{getColor(name)}}" />
+    <text
+        text-anchor="middle"
+        x="50%" y="50%" dy="0.35em"
+        pointer-events="auto"
+        fill="{{textColor}}"
+        font-family="{{fontFamily}}"
+        font-weight="{{fontWeight}}"
+        font-size="{{fontSize}}">
+        {{getInitials()}}
+    </text>
+</svg>

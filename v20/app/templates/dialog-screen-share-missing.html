@@ -1,0 +1,16 @@
+<div class="overlay-container brand-overlay" id="dialog-screen-share-missing" toggle>
+    <form class="overlay-content brand-secondary">
+        <div class="dialog-title" translate>IDS_DIALOG_SCREENSHARE_MISSING_TITLE</div>
+        <div class="dialog-content">
+            <span translate>IDS_DIALOG_SCREENSHARE_MISSING_MESSAGE</span>
+        </div>
+        <div class="alert-actions">
+            <button type="button" class="button square" ng-click="hide()">
+                <span translate>IDS_BUTTON_CANCEL</span>
+            </button>
+            <a ng-href="{{'IDS_SCREENSHARE_EXTENSION_URL' | translate}}" target="_blank" type="submit" class="button square" ng-click="hide();">
+                <span translate>IDS_BUTTON_INSTALL</span>
+            </a>
+        </div>
+    </form>
+</div>

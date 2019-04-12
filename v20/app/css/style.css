@@ -1,0 +1,298 @@
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 11pt;
+    overflow: hidden;
+    margin: 0;
+}
+
+p {
+    margin: 8px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select {
+    width: 100%;
+    margin: 8px 0;
+}
+
+input[type="number"] {
+    font-size: 11pt;
+    margin: 8px 0;
+}
+
+fieldset {
+    margin: 16px 0;
+    padding: 0;
+    border: none;
+    width: 100%;
+}
+fieldset legend {
+    font-weight: bold;
+    font-size: large;
+}
+fieldset table {
+    width: 100%;
+}
+fieldset label {
+    margin-right: 16px;
+    /*white-space: nowrap;*/
+}
+
+.clearfix {
+    clear: both;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9E9E9E;
+  border-radius: 4px;
+}
+
+.button {
+    display: inline-block;
+    position: relative;
+    width: 1em;
+    height: 1em;
+    line-height: 0;
+    font-size: 24px;
+    border-radius: 2em;
+    border: none;
+    vertical-align: middle;
+    opacity: .87;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    padding: 0.333em;
+}
+
+.button:focus {
+    outline: none;
+}
+
+.button:hover {
+    opacity: 1;
+    text-shadow: 0 0 8px white;
+}
+
+.button.square {
+    padding: 8px 16px;
+    margin-left: 8px;
+    font: inherit;
+    /*font-weight: bold;*/
+    border-radius: 2px;
+    border: none;
+    width: auto;
+    height: auto;
+}
+
+.button.transparent {
+    background-color: transparent;
+    color: inherit;
+    box-shadow: none !important;
+    /*border-width: 1px;
+    border-style: solid;*/
+}
+
+.button-like {
+    display: inline-block;
+    position: relative;
+}
+
+.name {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0 16px;
+    line-height: 40px;
+}
+.participant-list-name {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    /*margin: 0 16px;*/
+    line-height: 20px;
+    max-width: 350px;
+}
+.participant-list-name-detail {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    /*margin: 0 16px;*/
+    line-height: 20px;
+    font-size: smaller;
+    opacity: .5;
+}
+.avatar, .participant-info-avatar {
+    display: inline-block;
+    border-radius: 50%;
+    background-image: url(../img/avatar.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.avatar {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    line-height: 41px;
+    font-size: 24px;
+    margin-right: 16px;
+    text-align: center;
+    box-sizing: border-box;
+    float: left;
+}
+.participant-info-avatar {
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+}
+.calendar-avatar {
+    position: relative;
+    display: block;
+    width: 40px;
+    height: 40px;
+    line-height: 41px;
+    font-size: 24px;
+    border-radius: 50%;
+    margin-right: 16px;
+    text-align: center;
+    box-sizing: border-box;
+    float: left;
+}
+
+.avatar img,
+.avatar svg {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    height: 100%;
+    border-radius: 50%;
+}
+ .button .state,
+ .avatar .state {
+     position: absolute;
+     left: 0;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     opacity: .7;
+     border-radius: 50%;
+}
+
+.badge-container {
+    position: absolute;
+    right: -4px;
+    bottom: -4px;
+    font-weight: bolder;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 10px;
+    line-height: 10px;
+    overflow: hidden;
+}
+
+.badge {
+    display: inline-block;
+    height: 10px;
+    padding: 3px;
+    border-radius: 8px;
+    box-shadow: inherit;
+    background-color: inherit;
+}
+
+.menu {
+    float: right;
+    text-align: right;
+    /*margin-left: 16px;*/
+}
+
+.menu .button {
+    display: inline-block;
+}
+
+.placeholder-text {
+    opacity: .5;
+    text-align: center;
+}
+.placeholder-text a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.main-pip .virtual-stage {
+    white-space: normal;
+    width: 100%;
+    height: auto;
+}
+
+.virtual-pip {
+    display: inline-block;
+    margin: 8px;
+    background-color: #111;
+    text-align: center;
+    transition:all linear 0.2s;
+}
+
+/*.virtual-pip.ng-move,
+.virtual-pip.ng-enter,
+.virtual-pip.ng-leave {
+  transform: scaleX(1);
+}*/
+
+.virtual-pip.ng-leave.ng-leave-active,
+.virtual-pip.ng-move.ng-move-active,
+.virtual-pip.ng-enter
+{
+  transform: scaleX(0);
+}
+
+.virtual-pip.ng-leave,
+.virtual-pip.ng-move,
+.virtual-pip.ng-enter.ng-enter-active {
+  transform: scaleX(1);
+}
+
+.virtual-pip img {
+    width: 140px;
+    height: 140px;
+    display: inline-block;
+    margin: 10px;
+}
+
+.virtual-pip-name {
+    width: 160px;
+    text-align: left;
+    overflow: hidden;
+    padding: 8px;
+    background-color: #212121;
+}
+.virtual-pip-name div {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

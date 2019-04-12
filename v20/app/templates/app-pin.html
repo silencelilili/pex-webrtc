@@ -1,0 +1,60 @@
+<form class="full-size app-fullscreen brand-secondary" name="loginForm" ng-if="pinRequested || extensionRequested" ng-submit="loginForm.$valid && login(localStorage.conference, localStorage.name, params.pin, undefined, params.extension)">
+    <table class="full-size">
+        <tr>
+            <td class="brand-primary" style="padding: 16px">
+                <div class="max-width-640">
+                    <div>
+                        <a href="" class="transparent button sel-connect-cancel" style="float: left; margin-right: 16px" ng-click="cancelLogin()">
+                            <i class="mdi-arrow-back"></i>
+                        </a>
+                        <div class="name" translate>
+                            IDS_BUTTON_CANCEL
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="height: 100%">
+                <div class="content-box max-width-640" style="padding: 0 8px">
+                    <div ng-if="pinRequested.role">
+                        <div class="settings-header" translate></div>
+                        <div class="padded card brand-tertiary">
+                            <div>
+                                <label class="settings-label" translate>IDS_CONNECT_ROLE_PROMPT</label>
+                                <input class="sel-connect-role-host" required type="radio" name="role" value="host" ng-model="pinRequested.role" />
+                                <label for="role-host" translate>IDS_ROLE_HOST</label>
+                                <input class="sel-connect-role-guest" required type="radio" name="role" value="guest" ng-model="pinRequested.role" ng-change="params.pin = ''" />
+                                <label for="role-guest" translate>IDS_ROLE_GUEST</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="pinRequested.required || pinRequested.role === 'host'">
+                        <div class="settings-header" translate></div>
+                        <div class="padded card brand-tertiary">
+                            <div>
+                                <label class="settings-label" translate>IDS_CONNECT_PIN_LABEL</label>
+                                <input ng-if="!platformSettings.isAndroidClient" required type="password" focus-input ng-attr-placeholder="{{'IDS_CONNECT_PIN_PROMPT' | translate}}" ng-model="params.pin" class="sel-connect-pin" />
+                                <input ng-if="platformSettings.isAndroidClient" required type="tel" focus-input ng-attr-placeholder="{{'IDS_CONNECT_PIN_PROMPT' | translate}}" ng-model="params.pin" class="pinnumeric sel-connect-pin" />
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="extensionRequested.required">
+                        <div class="settings-header" translate></div>
+                        <div class="padded card brand-tertiary">
+                            <div>
+                                <label class="settings-label" translate>{{'IDS_CONNECT_EXTENSION_LABEL_' + extensionRequested.required}}</label>
+                                <input required type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" focus-input ng-attr-placeholder="{{'IDS_CONNECT_EXTENSION_PROMPT_' + + extensionRequested.required | translate}}" ng-model="params.extension" class="sel-connect-extension" />
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: right; padding: 8px;">
+                      <button type="submit" class="blue button square sel-connect-connect sel-pin-ok">
+                        <span translate>IDS_BUTTON_CONNECT</span>
+                      </button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>

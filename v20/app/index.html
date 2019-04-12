@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"  lang="en" ng-controller="MainController"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en" ng-controller="MainController">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <title ng-bind-template="{{'IDS_APPLICATION_NAME' | translate}}"></title>
+
+    <link href="configuration/favicon.png" rel="icon" type="image/x-icon" />
+
+    <link href="fonts/roboto/css.css" rel="stylesheet" type="text/css">
+    <link href="fonts/mdi/style.css" rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/stage.css" rel="stylesheet" />
+    <link href="css/app-bar.css" rel="stylesheet" />
+    <link href="css/side-bar.css" rel="stylesheet" />
+    <link href="css/toast.css" rel="stylesheet" />
+    <link href="css/mediastats.css" rel="stylesheet" />
+    <link href="css/dialpad.css" rel="stylesheet" />
+    <link href="css/chat.css" rel="stylesheet" />
+    <link href="css/login.css" rel="stylesheet" />
+    <link href="css/dropdown.css" rel="stylesheet" />
+    <link href="css/escalate-media.css" rel="stylesheet" />
+    <link href="css/file-share.css" rel="stylesheet" />
+    <link href="css/app-main.css" rel="stylesheet" />
+    <link ng-href="themes/default/brand.css" rel="stylesheet" />
+    <link ng-href="{{localStorage.theme}}/brand.css" rel="stylesheet" />
+
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="js/vendor/jquery-ui.min.js"></script>
+    <script src="js/vendor/jquery.titlealert.js"></script>
+    <script src="js/vendor/fullscreen.js"></script>
+
+    <script src="js/vendor/keen.min.js"></script>
+    <script src="js/vendor/angular.min.js"></script>
+    <script src="js/vendor/bindonce.js"></script>
+    <script src="js/vendor/jstz.min.js"></script>
+
+    <script src="js/vendor/angular-translate.min.js"></script>
+    <script src="js/vendor/angular-translate-loader-static-files.min.js"></script>
+    <script src="js/vendor/ngStorage.min.js"></script>
+
+    <script src="js/vendor/angular-sanitize.min.js"></script>
+    <script src="js/vendor/angular-enhance-text.min.js"></script>
+
+    <script src="js/vendor/respond.js"></script>
+    <!--[if lt IE 9]>
+    <script src="js/index-of-polyfill.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+
+    <!--[if gt IE 9]><!-->
+    <script src="js/vendor/pdf.js"></script>
+    <!--<![endif]-->
+    <script src="js/vendor/EventSource.js"></script>
+    <script src="js/vendor/swfobject.js"></script>
+
+
+    <script src="js/pexapp.js"></script>
+    <script src="configuration/settings.js"></script>
+    <script src="js/serversettings.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/webapp-global.js"></script>
+
+    <script src="js/call-history-service.js"></script>
+    <script src="js/toggle-directive.js"></script>
+    <script src="js/focus-directive.js"></script>
+    <script src="js/arrowkeys-directive.js"></script>
+    <script src="js/media-sources.js"></script>
+    <script src="js/media-device.service.js"></script>
+    <script src="js/call-service.js"></script>
+    <script src="js/srv-service.js"></script>
+    <script src="js/slide-share-service.js"></script>
+    <script src="js/reporting.service.js"></script>
+
+    <script src="js/avatar-directive.js"></script>
+
+    <script src="js/main-controller.js"></script>
+    <script src="js/conference.js"></script>
+
+    <script src="js/swfObject.js"></script>
+    <script src="js/aspect-watcher-directive.js"></script>
+    <script src="js/idle-timer.js"></script>
+
+    <script src="js/toast-service.js"></script>
+</head>
+
+<body ng-cloak class="brand-background">
+    <!--[if lt IE 9]>
+    <p>You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <script src="js/ptmutil.js"></script>
+
+    <div ng-if="!connection.data">
+        <div class="overlay-container" style="overflow: visible">
+            <div class="overlay-content" style="overflow: visible">
+                <div class="brand-secondary">
+                    <div ng-include="'templates/login.html'"></div>
+                </div>
+                <div class="login-footer">
+                    <a ng-href="{{ 'IDS_FOOTER_COMPANY_URL' | translate }}" target="_blank">
+                        <span translate>IDS_FOOTER_COMPANY</span>
+                    </a>
+                    <a href="" ng-click="toggle('dialog-licenses')">
+                        <span translate>IDS_FOOTER_ABOUT</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="overlay-container brand-overlay sel-dialog-settings" id="dialog-settings" toggle>
+            <div class="overlay-content brand-secondary" ng-include="'templates/dialog-settings.html'"></div>
+        </div>
+        <div ng-include="'templates/licenses.html'"></div>
+    </div>
+
+    <div ng-if="connection.data" ng-include="'templates/conference.html'" ng-controller="ConferenceController" idle-timer disable-idle="remoteVideoStream" arrow-keys></div>
+
+    <div class="toast-messages">
+        <div class="toast-message" ng-repeat="message in toastMessages track by $index" ng-click="toastMessages.splice($index, 1)">
+            <span translate>{{message}}</span>
+        </div>
+    </div>
+
+    <div class="overlay-container brand-overlay sel-modal-popup" ng-if="getModalMessage()" ng-click="getModalMessage().dismiss()">
+        <div class="overlay-content brand-secondary">
+            <div class="dialog-title" ng-if="getModalMessage().title" translate>{{getModalMessage().title}}</div>
+            <div class="dialog-content">
+                <div class="sel-modal-popup-message" translate>{{getModalMessage().message}}</div>
+            </div>
+            <div class="alert-actions">
+                <button type="button" class="button square" ng-repeat="action in getModalMessage().actions" ng-click="action.callback()">
+                    <span translate>{{action.caption}}</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div ng-include="'templates/dialog-call-escalate.html'"></div>
+</body>
+
+</html>

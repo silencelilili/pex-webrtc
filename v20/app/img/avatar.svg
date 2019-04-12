@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+
+ <metadata id="metadata3057">image/svg+xmlimage/svg+xml</metadata>
+ <g>
+  <title>Layer 1</title>
+  <g opacity="1.0" id="svg_8">
+   <rect  fill="#EEEEEE" id="svg_6" height="40" width="40" y="0" x="0" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null"/>
+   <path fill="#9E9E9E" id="path4424" d="m20,23c-4.005,0 -12,2.01 -12,6l0,1.5625c0.22298,0.254431 0.44877,0.511271 0.6875,0.75c2.94767,2.94767 7.14386,4.71875 11.3125,4.71875c4.16864,0 8.36483,-1.77108 11.3125,-4.71875c0.238729,-0.238729 0.46452,-0.495569 0.6875,-0.75l0,-1.5625c0,-3.99 -7.995001,-6 -12,-6zm0,-15c-3.315001,0 -6,2.685 -6,6c0,3.315001 2.684999,6 6,6c3.315001,0 6,-2.684999 6,-6c0,-3.315 -2.684999,-6 -6,-6z"/>
+  </g>
+ </g>
+</svg>

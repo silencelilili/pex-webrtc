@@ -1,0 +1,55 @@
+<div class="avatar">
+    <img class="brand-primary" ng-src="{{applicationSettings.overrideConferenceAvatar || connection.data.avatarUrl}}" onerror="this.style.display='none'" />
+    <div class="badge-container">
+        <div class="badge red" title="{{'IDS_CONFERENCE_MUTED_GUESTS_TOOLTIP' | translate}}" ng-if="call.guestsMuted">
+            <i class="mdi-moff"></i>
+        </div>
+        <div class="badge red" title="{{'IDS_CONFERENCE_LOCKED_TOOLTIP' | translate}}" ng-if="call.locked">
+            <i class="mdi-lock"></i>
+        </div>
+    </div>
+</div>
+<div class="sel-call-alias name" title="{{params.remote_alias || connection.data.alias}}">{{params.remote_alias || connection.data.alias}}</div>
+<div class="menu">
+    <a href="" class="transparent button" ng-click="open = true" ng-show="connection.data.isChair && (!connection.data.isGateway || applicationSettings.controlGatewayCalls)">
+        <i class="mdi-menu"></i>
+    </a>
+</div>
+<div class="clearfix"></div>
+<div class="app-bar-submenu-container" ng-if="open" ng-click="$parent.open = false">
+    <div class="submenu-content brand-tertiary">
+        <a href="" class="sel-conference-start brand-tertiary-hover" ng-if="!connection.data.hasStartedMedia" ng-click="call.startConference()">
+            <i class="mdi-people"></i>
+            <span translate>IDS_CONFERENCE_START</span>
+        </a>
+        <a href="" class="sel-participant-add brand-tertiary-hover" ng-click="toggle('dialog-dial-out')">
+            <i class="mdi-person-add"></i>
+            <span translate>IDS_PARTICIPANT_ADD</span>
+        </a>
+        <a href="" class="sel-conference-lock brand-tertiary-hover" ng-if="!call.locked" ng-click="call.toggleLock()">
+            <i class="mdi-lock-outline"></i>
+            <span translate>IDS_CONFERENCE_LOCK</span>
+        </a>
+        <a href="" class="sel-conference-unlock brand-tertiary-hover" ng-if="call.locked" ng-click="call.toggleLock()">
+            <i class="mdi-lock-open"></i>
+            <span translate>IDS_CONFERENCE_UNLOCK</span>
+        </a>
+        <a href="" class="sel-conference-mute-guests brand-tertiary-hover" ng-if="!call.guestsMuted" ng-click="toggle('dialog-guest-mute')">
+            <i class="mdi-moff"></i>
+            <span translate>IDS_CONFERENCE_MUTE_GUESTS</span>
+        </a>
+        <a href="" class="sel-conference-unmute-guests brand-tertiary-hover" ng-if="call.guestsMuted" ng-click="call.toggleMuteAllGuests()">
+            <i class="mdi-mic"></i>
+            <span translate>IDS_CONFERENCE_UNMUTE_GUESTS</span>
+        </a>
+        <a href="" class="sel-conference-disconnect-all brand-tertiary-hover" ng-click="connection.disconnectAll()">
+            <i class="mdi-call-end"></i>
+            <span translate>IDS_CONFERENCE_DISCONNECT_ALL</span>
+        </a>
+        <div style="border-bottom-width: 1px; border-bottom-style: solid" class="brand-secondary" ng-if="plugins.length"></div>
+        <a href="" class="brand-tertiary-hover" ng-repeat="plugin in plugins" ng-click="plugin.open = true;">
+            <i class="mdi-extension"></i>
+            <span translate>{{plugin.name}}</span>
+        </a>
+    </div>
+</div>

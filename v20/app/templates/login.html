@@ -1,0 +1,142 @@
+<div class="login-container">
+    <div class="brand-logo" ng-if="!platformSettings.isDesktopClient"></div>
+
+    <div class="red login-error sel-error-message" ng-if="errorMessage" translate="{{errorMessage}}" translate-values="{alias: localStorage.conference}"></div>
+
+    <div ng-if="loadingConference">
+        <div class="dialog-content">
+            <div class="placeholder-text" style="margin: 10px">
+                <div>
+                    <img src="img/spinner-black.svg" class="spinner" />
+                </div>
+                <span translate-values="{alias: params.conference}" translate>IDS_CONNECT_LOADING</span>
+            </div>
+        </div>
+        <div class="alert-actions" style="text-align: center">
+            <button type="button" class="button square sel-pin-cancel" ng-click="cancelLogin()">
+                <span translate ng-if="platformSettings.isDesktopClient">IDS_BUTTON_CLOSE</span>
+                <span translate ng-if="!platformSettings.isDesktopClient">IDS_BUTTON_CANCEL</span>
+            </button>
+        </div>
+    </div>
+
+    <form name="pinForm" ng-submit="pinForm.$valid && login(params.conference, params.name, params.pin, undefined, params.extension)" ng-if="(pinRequested || extensionRequested) && !loadingConference">
+        <div class="dialog-content">
+            <fieldset ng-if="pinRequested.role">
+                <legend translate>IDS_CONNECT_ROLE_PROMPT</legend>
+                <input class="sel-connect-role-host" required type="radio" name="role" value="host" ng-model="pinRequested.role" />
+                <label for="role-host" translate>IDS_ROLE_HOST</label>
+                <input class="sel-connect-role-guest" required type="radio" name="role" value="guest" ng-model="pinRequested.role" ng-change="params.pin = ''" />
+                <label for="role-guest" translate>IDS_ROLE_GUEST</label>
+            </fieldset>
+            <fieldset ng-if="pinRequested.required || pinRequested.role === 'host'">
+                <legend translate>IDS_CONNECT_PIN_LABEL</legend>
+                <input required type="password" focus-input ng-attr-placeholder="{{'IDS_CONNECT_PIN_PROMPT' | translate}}" ng-model="params.pin" class="sel-connect-pin" />
+            </fieldset>
+            <fieldset ng-if="extensionRequested.required">
+                <legend translate>{{'IDS_CONNECT_EXTENSION_LABEL_' + extensionRequested.required}}</legend>
+                <input required type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" focus-input ng-attr-placeholder="{{'IDS_CONNECT_EXTENSION_PROMPT_' + extensionRequested.required | translate}}" ng-model="params.extension" class="sel-connect-extension" />
+            </fieldset>
+        </div>
+
+        <div class="alert-actions" style="text-align: center" ng-if="!platformSettings.isDesktopClient">
+            <button type="button" class="button square sel-pin-cancel" ng-click="cancelLogin()">
+                <span translate>IDS_BUTTON_CANCEL</span>
+            </button>
+            <button type="submit" class="button square sel-pin-ok">
+                <span translate>IDS_BUTTON_CONNECT</span>
+            </button>
+        </div>
+
+        <div class="alert-actions" style="text-align: center" ng-if="platformSettings.isDesktopClient">
+            <button type="button" class="button square sel-pin-cancel" ng-click="cancelLogin()">
+                <span translate>IDS_BUTTON_CANCEL</span>
+            </button>
+            <button type="submit" class="button square sel-pin-ok">
+                <span translate>IDS_BUTTON_CONNECT</span>
+            </button>
+        </div>
+    </form>
+
+    <form name="loginForm" ng-submit="loginForm.$valid && loginApp(params.conference, params.name)" ng-show="!pinRequested && !extensionRequested && !loadingConference">
+        <!-- <div class="dialog-title"></div> -->
+        <div class="dialog-content" style="overflow: visible">
+            <fieldset ng-show="!platformSettings.isDesktopClient">
+                <legend translate>IDS_CONNECT_JOIN_PROMPT</legend>
+                <ul class="dropdown" style="float:right" ng-if="callHistory.values">
+                    <li>
+                        <a href="" class="square button" style="padding: 5px; margin: 8px 0 4px 0; border-radius: 0 2px 2px 0;">
+                            <i class="mdi-history"></i>
+                            <i class="mdi-arrow-drop-down"></i>
+                        </a>
+                        <div class="brand-tertiary submenu-content dropdown-menu" style="margin: 0; max-height: 175px">
+                            <a href="" class="brand-tertiary-hover" ng-click="params.conference=item.alias;" onclick="$('#conference-alias').focus()" ng-repeat="item in callHistory.values | orderBy:'timestamp':true">
+                                <span>{{item.alias}}</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                <div style="overflow: hidden">
+                    <input type="text" required autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="512" id="conference-alias" focus-input ng-attr-placeholder="{{'IDS_CONNECT_URI_PROMPT' | translate}}" ng-model="params.conference" class="sel-connect-uri-prompt" style="border-radius: 2px 0 0 2px" />
+                </div>
+
+            </fieldset>
+            <fieldset ng-show="!platformSettings.isDesktopClient">
+                <legend translate>IDS_SETTINGS_DISPLAY_NAME</legend>
+                <input type="text" required maxlength="512" class="sel-settings-display-name" ng-attr-placeholder="{{'IDS_SETTINGS_DISPLAY_NAME_PLACEHOLDER' | translate}}" ng-model="params.name" />
+            </fieldset>
+        </div>
+
+        <div class="alert-actions" style="text-align: center; white-space: nowrap" ng-if="!platformSettings.isDesktopClient">
+            <button type="button" class="sel-connect-settings square outline button" ng-attr-title="{{'IDS_SETTINGS_TITLE' | translate}}" ng-click="toggle('dialog-settings')">
+                <span translate>IDS_SETTINGS_TITLE</span>
+            </button>
+
+            <div style="display: inline-block" title="{{params.media ? (params.audioonly ? 'IDS_TOOLBAR_START_AUDIO_ONLY' : 'IDS_TOOLBAR_START_VIDEO') : 'IDS_TOOLBAR_START' | translate}}">
+                <button type="submit" class="square button sel-connect-connect" style="padding-right: 8px; border-radius: 2px 0 0 2px;">
+                    <span translate>IDS_BUTTON_CONNECT</span>
+                </button><ul class="dropdown">
+                    <li>
+                        <button type="button" class="square button" style="padding: 8px 8px; margin: 0; border-radius: 0 2px 2px 0;">
+                            <span ng-if="params.media && !params.audioonly">
+                                <i class="mdi-call"></i>
+                                <i class="mdi-videocam"></i>
+                            </span>
+                            <span ng-if="params.media && params.audioonly">
+                                <i class="mdi-call"></i>
+                                <i class="mdi-videocam disabled"></i>
+                            </span>
+                            <span ng-if="!params.media">
+                                <i class="mdi-call disabled"></i>
+                                <i class="mdi-videocam disabled"></i>
+                            </span>
+                            <i class="mdi-arrow-drop-down"></i>
+                        </button>
+                        <div class="dropdown-menu" style="margin: 0">
+                            <div class="submenu-content brand-tertiary sel-connect-dropdown" style="margin: 4px 0 0 0" ng-click="loginApp(params.conference, params.name)">
+                                <a href="" class="brand-tertiary-hover sel-join-video" ng-click="params.media=true; params.audioonly=false" title="{{'IDS_TOOLBAR_START_VIDEO' | translate}}">
+                                    <i class="mdi-call"></i>
+                                    <i class="mdi-videocam"></i>
+                                </a>
+                                <a href="" class="brand-tertiary-hover sel-join-audio" ng-click="params.media=true; params.audioonly=true" title="{{'IDS_TOOLBAR_START_AUDIO_ONLY' | translate}}">
+                                    <i class="mdi-call"></i>
+                                    <i class="mdi-videocam disabled"></i>
+                                </a>
+                                <a href="" class="brand-tertiary-hover sel-join" ng-click="params.media=false; params.audioonly=false" title="{{'IDS_TOOLBAR_START' | translate}}">
+                                    <i class="mdi-call disabled"></i>
+                                    <i class="mdi-videocam disabled"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="alert-actions" style="text-align: center" ng-if="platformSettings.isDesktopClient">
+            <button type="button" class="button square sel-pin-cancel" ng-click="cancelLogin()">
+                <span translate>IDS_BUTTON_CLOSE</span>
+            </button>
+        </div>
+    </form>
+</div>

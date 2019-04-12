@@ -1,0 +1,107 @@
+.toast-messages {
+    position: fixed;
+    top: 8px;
+    right: 0;
+    z-index: 2;
+}
+
+.toast-message {
+    clear: both;
+    float: right;
+    background-color: black;
+    color: white;
+    opacity: .87;
+    padding: 16px;
+    border-radius: 2px;
+    margin: 8px 16px;
+    max-width: 80%;
+}
+
+.overlay-container {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    max-height: 100%;
+    text-align: center;
+    z-index: 1;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.overlay-container:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em;
+}
+
+.overlay-content {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    /*min-width: 300px;*/
+    max-width: 90%;
+    max-height: 100%;
+    overflow: auto;
+    box-sizing: border-box;
+    white-space: initial;
+}
+
+.brand-overlay {
+    background-color: rgba(0, 0, 0, .7);
+    color: white;
+}
+
+.overlay-content.brand-secondary,
+.overlay-content > .brand-secondary,
+.overlay-content.brand-overlay {
+    padding: 16px;
+    border-radius: 2px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, .2);
+    margin: 8px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select {
+    font: inherit;
+    vertical-align: middle;
+    border-radius: 2px;
+    padding: 4px 8px;
+    border-width: 1px;
+    border-style: solid;
+    box-sizing: border-box;
+}
+
+.dialog-title {
+    font-weight: bold;
+    font-size: large;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.dialog-sub-title {
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.dialog-content {
+    overflow: auto;
+    margin: 16px 0;
+    /*padding: 0 8px;*/
+    max-height: 70vh;
+    text-align: initial;
+    white-space: initial;
+}
+.alert-actions {
+    text-align: right;
+    white-space: nowrap;
+}

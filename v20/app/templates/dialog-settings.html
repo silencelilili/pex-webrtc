@@ -1,0 +1,169 @@
+<form id="settings" name="settingsForm" ng-submit="hide()" ng-init="flashPreviewId = 'flash-preview-video'" ng-controller="UserMediaPreviewController">
+    <div class="dialog-title" translate>IDS_SETTINGS_TITLE</div>
+    <div class="dialog-content" style="padding: 4px">
+        <div class="settings-header" translate>IDS_SETTINGS_MEDIA</div>
+        <div class="padded card brand-tertiary">
+            <label class="settings-label" translate>IDS_SETTINGS_CAMERA</label>
+            <div ng-show="mediaSources.video">
+                <select class="sel-escalate-camera" ng-model="localStorage.cameraSourceId" ng-options="source.id as (source.label | translate) for source in mediaSources.video" ng-change="previewUserMedia()">
+                    <option value="" translate>IDS_SETTINGS_CAMERA_DEFAULT</option>
+                </select>
+            </div>
+            <div ng-if="platformSettings.hasWebRTC && localStorage.cameraSourceId !== false && localStorage.defaultBandwidth && mediaSources.video.length" style="text-align: center;">
+                <div class="video-preview">
+                    <video muted autoplay playsinline ng-src="{{localMediaStreamURL}}" ng-if="platformSettings.hasWebRTC" pex-localstream />
+                </div>
+                <div ng-if="platformSettings.screenshareSupported && (platformSettings.timezone == 'Asia/Tokyo' || platformSettings.timezone == 'Asia/Seoul')" style="text-align: left;">
+                    <label class="settings-label" translate>IDS_SETTINGS_POWER_FREQUENCY</label>
+                    <select class="sel-camera-power-hz" ng-model="localStorage.powerLineFrequency" ng-change="previewUserMedia()">
+                        <option value="0" translate>IDS_SETTINGS_CAMERA_DEFAULT</option>
+                        <option value="60">60Hz</option>
+                        <option value="50">50Hz</option>
+                    </select>
+                </div>
+            </div>
+            <div ng-if="!platformSettings.hasWebRTC" style="text-align: center;">
+                <div class="video-preview">
+                    <div id="flash-preview-placeholder"></div>
+                    <div swf-object flash-id="flash-preview-video" replace-id="flash-preview-placeholder" ref-id="/static/webrtc/flash/PexVideo.swf" width="100%" height="100%"></div>
+                </div>
+            </div>
+            <!-- <div>
+                <label>
+                    <input type="checkbox" ng-model="localStorage.muteCameraOnJoin" />
+                    <span translate>IDS_SETTINGS_MUTE_CAMERA_ON_JOIN</span>
+                </label>
+            </div> -->
+        </div>
+        <div class="padded card brand-tertiary">
+            <label class="settings-label" translate>IDS_SETTINGS_MICROPHONE</label>
+            <div ng-show="mediaSources.audio">
+                <select class="sel-escalate-microphone" ng-model="localStorage.microphoneSourceId" ng-options="source.id as (source.label | translate) for source in mediaSources.audio" ng-change="previewUserMedia()">
+                    <option value="" translate>IDS_SETTINGS_MICROPHONE_DEFAULT</option>
+                </select>
+            </div>
+            <div ng-show="mediaSources.audio" class="audio-preview" style="background-color: lightgrey; margin-bottom: 8px;">
+                <div class="blue audio-preview" ng-style="{ width: microphoneVolume+'%' }">
+                </div>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" ng-model="localStorage.muteOnJoin" />
+                    <span translate>IDS_SETTINGS_MUTE_ON_JOIN</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="padded card brand-tertiary" ng-show="mediaSources.output.length">
+            <label class="settings-label" translate>IDS_SETTINGS_AUDIO_OUTPUT</label>
+            <select class="sel-escalate-output" ng-model="localStorage.audioOutputId" ng-options="source.id as (source.label | translate) for source in mediaSources.output">
+                <option value="" translate>IDS_SETTINGS_AUDIO_OUTPUT_DEFAULT</option>
+            </select>
+            <div style="text-align: right">
+                <pex-test-audio></pex-test-audio>
+            </div>
+        </div>
+
+        <div class="padded card brand-tertiary">
+            <label>
+                <input type="checkbox" ng-model="localStorage.promptMedia" />
+                <span translate>IDS_SETTINGS_SHOW_DEVICE_DIALOG</span>
+            </label>
+        </div>
+
+        <div class="padded card brand-tertiary">
+            <div ng-if="!applicationSettings.serverAddress">
+                <label class="settings-label" translate>IDS_SETTINGS_SERVER_ADDRESS</label>
+                <div>
+                    <input type="text" ng-model="localStorage.serverAddress" />
+                </div>
+            </div>
+            <div>
+                <label class="settings-label" translate>IDS_BANDWIDTH</label>
+                <div>
+                    <select class="sel-escalate-bandwidth" ng-model="localStorage.defaultBandwidth" ng-options="b.value as (b.name | translate:{bandwidth: b.value}) for b in applicationSettings.bandwidths">
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="(applicationSettings.themes | numkeys) > 1 || (applicationSettings.languages | numkeys) > 1">
+            <div class="settings-header" translate>IDS_SETTINGS_TITLE_UI</div>
+            <div class="padded card brand-tertiary">
+                <div ng-if="(applicationSettings.themes | numkeys) > 1">
+                    <label class="settings-label" translate>IDS_SETTINGS_THEME</label>
+                    <div>
+                        <select ng-model="localStorage.theme" ng-options="path as name for (name, path) in applicationSettings.themes"></select>
+                    </div>
+                </div>
+                <div ng-if="(applicationSettings.languages | numkeys) > 1">
+                    <label class="settings-label" translate>IDS_SETTINGS_LANGUAGE</label>
+                    <div>
+                        <select ng-model="localStorage.language" ng-options="key as name for (name, key) in applicationSettings.languages"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-header" translate>IDS_SETTINGS_ADVANCED</div>
+
+        <div class="padded card brand-tertiary" ng-if="platformSettings.screenshareSupported">
+            <label class="settings-label" translate>IDS_SETTINGS_SCREENSHARE_QUALITY</label>
+            <div>
+                <table style="width:80%; padding-left:1em; padding-right:1em">
+                    <tr>
+                        <td width="20%"></td>
+                        <td width="60%" align="center" class="settings-screenshare-slider-annotation">{{localStorage.screenshareFrameRate}} fps</td>
+                        <td width="20%"></td>
+                    </tr>
+                        <td width="20%" align="right" style="padding-right: 1em" translate>IDS_SETTINGS_SCREENSHARE_SHARPNESS</td>
+                        <td width="60%"><input type="range" min="1" max="15" step="2" ng-model="localStorage.screenshareFrameRate" style="width:100%"/></td>
+                        <td width="20%" align="left" style="padding-left: 1em" translate>IDS_SETTINGS_SCREENSHARE_MOTION</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="padded card brand-tertiary" style="white-space: nowrap;">
+            <div>
+                <label>
+                    <input type="checkbox" ng-model="localStorage.promptDisconnect" class="sel-settings-disconnect-prompt" />
+                    <span translate>IDS_SETTINGS_DISCONNECT_PROMPT</span>
+                </label>
+            </div>
+            <div ng-if="false">
+                <label>
+                    <input type="checkbox" ng-model="params.forceFlash" ng-change="forceFlashChanged()" />
+                    <span translate>IDS_SETTINGS_FORCE_FLASH</span>
+                </label>
+            </div>
+
+            <div ng-if="platformSettings.hasWebRTC && applicationSettings.enableFullMotionPresentation">
+                <label>
+                    <input type="checkbox" ng-model="localStorage.fullMotionPresentationByDefault" />
+                    <span translate>IDS_SETTINGS_FULL_MOTION_PRESENTATION</span>
+                </label>
+            </div>
+            <div ng-if="serverSettings.analyticsReportingEnabled">
+                <label>
+                    <input type="checkbox" ng-model="localStorage.analyticsReportingEnabled" />
+                    <span translate>IDS_SETTINGS_ENABLE_ANALYTICS</span>
+                </label>
+            </div>
+            <div style="margin-top: 8px; text-align: right">
+                <a href="" class="outline square button" style="border: 1px solid" ng-click="callHistory.clear()">
+                    <span translate>IDS_SETTINGS_CLEAR_CALL_HISTORY</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert-actions">
+        <a href="" class="square button" ng-click="localStorage.$reset(); disconnect(true)">
+            <span translate>IDS_SETTINGS_RESET</span>
+        </a>
+        <button type="submit" class="sel-settings-button-ok green button square">
+            <span translate>IDS_BUTTON_OK</span>
+        </button>
+    </div>
+</form>

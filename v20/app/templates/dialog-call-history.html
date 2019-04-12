@@ -1,0 +1,42 @@
+<div class="overlay-container brand-overlay sel-dialog-recent-calls" id="dialog-call-history" toggle>
+    <div class="overlay-content brand-secondary" style="width: 400px">
+        <div class="dialog-title" translate>IDS_HISTORY_RECENT</div>
+        <div class="dialog-content">
+            <div ng-if="!callHistory.values.length">
+                <span translate>IDS_HISTORY_PLACEHOLDER</span>
+            </div>
+            <div class="side-bar-list-item brand-tertiary" title="{{item.timestamp | date:'medium' }}" ng-repeat="item in callHistory.values | orderBy:'timestamp':true">
+                <div class="menu">
+                    <a class="button" href="" title="{{'IDS_BUTTON_DELETE' | translate}}" ng-click="callHistory.remove(item.alias)">
+                        <i class="mdi-delete"></i>
+                    </a>
+                    <a class="green button" href="" title="{{'IDS_BUTTON_CONNECT' | translate}}" ng-click="params.conference=item.alias; hide(); login(params.conference, params.name)" ng-if="item.status==='outgoing'">
+                        <i class="mdi-call"></i>
+                    </a>
+                </div>
+                <div class="avatar">
+                    <img ng-src="{{applicationSettings.overrideConferenceAvatar || getConferenceAvatarUrl(item.alias)}}" onerror="this.style.display='none'" />
+                    <div class="badge-container">
+                        <div class="badge green" ng-if="item.status === 'outgoing'">
+                            <i class="mdi-call-made"></i>
+                        </div>
+                        <div class="badge red" ng-if="item.status === 'missed'">
+                            <i class="mdi-call-missed"></i>
+                        </div>
+                        <div class="badge green" ng-if="item.status === 'incoming'">
+                            <i class="mdi-call-received"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="name">
+                    {{item.alias}}
+                </div>
+            </div>
+        </div>
+        <div class="alert-actions">
+            <button type="button" class="sel-recent-calls-button-close square button" ng-click="hide()">
+                <span translate>IDS_BUTTON_CLOSE</span>
+            </button>
+        </div>
+    </div>
+</div>

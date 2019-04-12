@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<svg width="160" height="90" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+    <metadata id="metadata3128">image/svg+xml</metadata>
+    <rect fill="#191919" id="svg_3" y="0" x="0" height="90" width="160" />
+    <path opacity="0.25" fill="#ffffff" id="svg_1" d="m80,37l0,-3l4,4l-4,4l0,-3c-3.309998,0 -6,2.689999 -6,6c0,1.009998 0.25,1.970001 0.699997,2.799999l-1.459999,1.459999c-0.779999,-1.23 -1.239998,-2.689999 -1.239998,-4.259998c0,-4.419998 3.580002,-8 8,-8zm0,14c3.309998,0 6,-2.689999 6,-6c0,-1.009998 -0.25,-1.970001 -0.699997,-2.799999l1.459999,-1.459999c0.779999,1.23 1.239998,2.689999 1.239998,4.259998c0,4.419998 -3.580002,8 -8,8l0,3l-4,-4l4,-4l0,3z">
+        <animateTransform attributeName="transform" type="rotate" from="0 80 45" to="360 80 45" dur="1s" repeatDur="indefinite" />
+    </path>
+</svg>

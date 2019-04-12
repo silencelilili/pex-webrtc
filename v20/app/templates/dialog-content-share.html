@@ -1,0 +1,21 @@
+<div class="overlay-container brand-overlay" id="dialog-content-share" toggle ng-click="hide()">
+    <div class="overlay-content brand-secondary sel-present-dialog">
+        <div class="dialog-title" translate>IDS_SHARE_CONTENT</div>
+        <div class="dialog-content brand-tertiary">
+            <a href="" class="sel-present-screen brand-tertiary-hover" ng-click="call.startScreenShare()" ng-if="platformSettings.screenshareSupported">
+                <i class="mdi-computer"></i>
+                <span translate>IDS_SHARE_SCREEN</span>
+            </a>
+            <a href="" class="sel-present-slides brand-tertiary-hover" ng-click="toggle('dialog-slide-share')">
+                <!-- <i class="mdi-insert-drive-file"></i> -->
+                <i class="mdi-perm-media"></i>
+                <span translate>IDS_SHARE_SLIDES</span>
+            </a>
+        </div>
+        <div class="alert-actions">
+            <button type="button" class="button square" ng-click="hide()">
+                <span translate>IDS_BUTTON_CLOSE</span>
+            </button>
+        </div>
+    </div>
+</div>
